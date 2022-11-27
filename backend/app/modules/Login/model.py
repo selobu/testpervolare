@@ -1,5 +1,5 @@
 from typing import Optional
-from tools import map_name_to_table
+from tools import map_name_to_table, digest
 from sqlmodel import Field, SQLModel, Relationship, Column, String, Field
 from pydantic import EmailStr, validator
 from hashlib import sha256
@@ -19,4 +19,4 @@ class Login(SQLModel, table=True):
         r = "".join(re.findall("[0-9]*[a-zA-Z]*[0-9]*[\*\/\+\-\$\%\&]*", v))
         assert len(r) != len(v)
         # the system stores only the sha256 for security reasons
-        return sha256(r.encode("utf-8")).hexdigest()
+        return digest(r)
