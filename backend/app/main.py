@@ -29,6 +29,9 @@ app = FastAPI(
 settings.app = app
 setattr(app, "Tb", Tb)
 
+# authentication
+import auth
+
 # select between SQLALCHEMY and MYsql engine
 USESQLALCMEHY = False
 if len(settings.database_user_uri.split("None")) > 4:
