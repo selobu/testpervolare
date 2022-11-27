@@ -19,4 +19,3 @@ class Login(SQLModel, table=True):
         assert len(r) == len(v)
         # the system stores only the sha256 for security reasons
         return digest(r)
-a=1
