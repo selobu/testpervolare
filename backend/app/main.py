@@ -11,7 +11,7 @@ from fastapi import FastAPI
 from tools import Tb
 from fastapi.middleware.cors import CORSMiddleware
 from config import settings
-from sqlmodel import create_engine
+from sqlmodel import SQLModel, create_engine
 from imp_modules import modulesResolver
 from fake import create_emails, create_users
 
@@ -52,6 +52,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+# Create data structure
+SQLModel.metadata.create_all(engine)
 
 # populate initial data
 create_users()

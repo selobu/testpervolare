@@ -18,6 +18,7 @@ def create_emails():
             session.add(Tb.TipoSolicitud(**pqr))
         session.commit()
 
+
 def create_users():
     Tb = settings.app.Tb
     default_users = [
@@ -38,18 +39,17 @@ def create_users():
             "activo": False,
         },
     ]
-    correos = [u["correo"] for u in default_users]
+    nombres = [u["nombre_completo"] for u in default_users]
     with Session(settings.engine) as session:
-        not2add = select(Tb.User.correo).filter(Tb.User.correo.in_(correos))
+        not2add = select(Tb.User.nombre_completo).\
+            filter(Tb.User.nombre_completo.in_(nombres))
         not2add = session.exec(not2add).all()
         # testing under heroku server
         # raise Exception(dumps(session.exec(select(Tb.User.correo)).all()))
-        toadd = [usr for usr in default_users if usr["correo"] not in not2add]
+        toadd = [usr for usr in default_users if usr["nombre_completo"] not in not2add]
         for user in toadd:
-            user["password"] = digest(user["password"])
             session.add(Tb.User(**user))
         session.commit()
-
 
 def fake_hash_password(password: str):
     return "fakehashed" + password

@@ -6,7 +6,7 @@ from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 
 app = settings.app
-Tb = settings.Tb
+Tb = app.Tb
 
 usr = {}
 

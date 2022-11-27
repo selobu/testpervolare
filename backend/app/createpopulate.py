@@ -5,7 +5,7 @@ from os.path import abspath
 
 if abspath(".") not in path:
     path.append(abspath("."))
-from fake import createusers, setpqroptions
+from fake import create_users, create_emails
 from main import Tb, settings
 from sqlmodel import create_engine, SQLModel
 
@@ -14,6 +14,6 @@ engine = create_engine(settings.database_maria_uri)
 SQLModel.metadata.create_all(engine)
 
 # populating structure
-createusers()
-setpqroptions()
+create_users()
+create_emails()
 print("//----db updated----//")
