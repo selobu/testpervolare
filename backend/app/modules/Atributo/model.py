@@ -21,9 +21,11 @@ class Atributo(SQLModel, table=True):
     def name_validator(cls, v):
         if not (len(v)>=2 and len(v)<=10):
             raise ValueError('name len incorrect, only allowed >> 10 > name > 2,')
+        return v
     @validator('type')
-    def name_validator(cls, v):
+    def type_validator(cls, v):
         allowed = ['Color', 'Talla','Marca','Fábrica']
         if v not in allowed:
             raise ValueError(f'type incorrect, only allowed {allowed}')
+        return v
     
