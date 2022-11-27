@@ -28,9 +28,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements/test.pip
       - name: Test with inv
-        run: |
-          cd backend
-          inv cover qa
+        run: inv cover qa # inv helps you investigate IPs/hosts and DNS records then returns the results in a copy/pasteable format.
       - name: Codecov
         uses: codecov/codecov-action@v1
         with:
