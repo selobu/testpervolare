@@ -21,4 +21,3 @@ class Login(SQLModel, table=True):
         assert len(r) != len(v)
         # the system stores only the sha256 for security reasons
         return sha256(r.encode('utf-8')).hexdigest()
-    

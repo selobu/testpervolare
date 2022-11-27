@@ -18,6 +18,7 @@ class Producto(SQLModel, table=True):
     createDate: date = Field(sa_column=Column(Date))
     updateDate: date = Field(sa_column=Column(Date))
     softDelete: Optional[date] = Field(default = None, sa_column=Column(Date))
+    
     @validator('name')
     def name_validator(cls, v):
         res = ''.join(re.findall('([0-9]*[a-zA-Z]+[0-9]*)', v))
@@ -36,5 +37,7 @@ class Producto(SQLModel, table=True):
             raise ValueError('only allowed charactes and numerical values')
         return v
     
-
-    
+@map_name_to_table
+class ProductAttribute(SQLModel, table=True):
+    product_id: str = Field(default=None, foreign_key="producto.id", primary_key=True)
+    attribute_id: str = Field(default=None, foreign_key="atributo.id", primary_key=True)
