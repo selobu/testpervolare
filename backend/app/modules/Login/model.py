@@ -1,10 +1,10 @@
 from typing import Optional
 from tools import map_name_to_table, digest
-from sqlmodel import Field, SQLModel, Relationship, Column, String, Field
+from sqlmodel import Field, SQLModel, Column, String, Field
 from pydantic import EmailStr, validator
-from hashlib import sha256
 
 import re
+
 
 @map_name_to_table
 class Login(SQLModel, table=True):
