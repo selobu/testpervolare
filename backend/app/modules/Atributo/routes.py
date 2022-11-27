@@ -5,8 +5,13 @@ from fastapi.security import OAuth2PasswordBearer
 from tools import paginate_parameters
 from typing import Union
 from config import settings
-from main import app
 from sqlmodel import Session, select
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
+router = APIRouter(
+    prefix="/Atributo",
+    tags=["Atributo"],
+    dependencies=[Depends(oauth2_scheme)],
+    responses={404: {"description": "Not found"}},
+)
