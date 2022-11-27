@@ -6,6 +6,6 @@ Under development-
 
 Repo status
 
--> Backend: the model ready 
+-> Backend: the model is ready 
 -> Backend: missing routes
 -> Frontend: missing
