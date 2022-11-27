@@ -30,7 +30,7 @@ Repository status
 * [x] Backend: model. 27-11-2022
 * [x] Backend: Model fields validation. 27-11-2022
 * [x] Github: lint - using black 
-* [ ] Backend: Routes
+* [x] Github: Add badges to show repository status 
 * [ ] Backend: Authentication
 * [ ] Backend: Tests
 * [ ] Backend: Migrations
