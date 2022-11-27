@@ -13,6 +13,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from config import settings
 from sqlmodel import create_engine
 from imp_modules import modulesResolver
+from fake import create_emails, create_users
 
 app = FastAPI(
     title=settings.api_name,
@@ -51,6 +52,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# populate initial data
+create_users()
+create_emails()
 
 if USESQLALCMEHY:
     import uvicorn
