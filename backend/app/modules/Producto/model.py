@@ -2,9 +2,8 @@ from datetime import date
 from typing import Optional
 from xmlrpc.client import boolean
 from tools import map_name_to_table
-from sqlmodel import Field, SQLModel, Relationship, Column, String,\
+from sqlmodel import Field, SQLModel, Column, String,\
     Field, Float, Date
-from pydantic import EmailStr
 from uuid import uuid4
 from pydantic import validator
 import re
