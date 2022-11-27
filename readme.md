@@ -1,5 +1,6 @@
 # Pervolare test
 ![Lint](https://github.com/selobu/testpervolare/actions/workflows/black.yml/badge.svg)
+![Lint](https://github.com/selobu/testpervolare/actions/workflows/test.yml/badge.svg)
 ![Codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)
 
 start docker-compose.yml
