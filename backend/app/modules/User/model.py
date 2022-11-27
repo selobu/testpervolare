@@ -17,5 +17,3 @@ class User(SQLModel, table=True):
     municipio: str = Field(sa_column=Column(String(2000)))
     direccion: str = Field(sa_column=Column(String(2000)))
     activo: bool = True
-    pertenecealgrupo: bool = False
-    password: str = Field(sa_column=Column(String(2000)))
