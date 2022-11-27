@@ -16,10 +16,16 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
-
 Tb = settings.app.Tb
 engine = settings.engine
 
+@router.post("/", response_model = Tb.User, status_code=status.HTTP_201_CREATED)
+async def registrar_user(user: Tb.User, token: str = Depends(oauth2_scheme)):
+    with Session(engine) as session:
+        session.add(user)
+        session.commit()
+        session.refresh(user)  # updating the id
+    return user
 
 def get_user(email: str):
     with Session(engine) as session:
@@ -27,7 +33,7 @@ def get_user(email: str):
         res = session.exec(res).first()
         if res is not None:
             return res
-        raise HTTPException(status_code=404, detail="Usuario no encontradp")
+        raise HTTPException(status_code=404, detail="User not found")
 
 
 def fake_decode_token(token):
@@ -40,7 +46,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Credenciales de autenticación inválidas",
+            detail="Invalid credentials",
             headers={"WWW-Authenticate": "Bearer"},
         )
     return user
@@ -48,7 +54,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 
 async def get_current_active_user(current_user: Tb.User = Depends(get_current_user)):
     if not current_user.activo:
-        raise HTTPException(status_code=400, detail="Usuario inactivo")
+        raise HTTPException(status_code=400, detail="Inactive user please contact the administrator at admin_mail@mail.com")
     return current_user
 
 
@@ -62,12 +68,3 @@ async def read_all_user(
         res = select(Tb.User).limit(limit)
         res = session.exec(res).all()
     return res
-
-
-@router.post("/", response_model=Tb.User, status_code=status.HTTP_201_CREATED)
-async def registrar_user(user: Tb.User, token: str = Depends(oauth2_scheme)):
-    with Session(engine) as session:
-        session.add(user)
-        session.commit()
-        session.refresh(user)  # updating the id
-    return user

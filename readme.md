@@ -4,11 +4,19 @@
 ![codecov](https://codecov.io/gh/selobu/testpervolare/branch/master/graph/badge.svg)
 ![Codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)
 
-start docker-compose.yml
 
-navigate to http://localhost/docs
+Usage
+======
+
+You can use it with Docker:
+
+    $ docker compose -f "docker-compose.yml" down 
+    $ docker compose -f "docker-compose.yml" up -d --build
+
+Navigate to http://localhost/docs
 
 Repository status
+-----------------
 
 * [x] MySQL: Database. 26-11-2022
 * [x] MySQL: Tables. 26-11-2022
@@ -24,3 +32,5 @@ Repository status
 * [ ] Backend: Tests
 * [ ] Backend: Migrations
 * [ ] Frontend
+
+
