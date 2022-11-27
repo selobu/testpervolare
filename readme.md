@@ -29,8 +29,9 @@ Repository status
 * [x] Docker: Backend. 26-11-2022
 * [x] Backend: model. 27-11-2022
 * [x] Backend: Model fields validation. 27-11-2022
-* [x] Github: lint - using black 
-* [x] Github: Add badges to show repository status 
+* [x] Github: lint - using black.  27-11-2022
+* [x] Github: Added badges to show repository status.  27-11-2022 
+* [x] Backend: Added two users by default, to be used to test the auth. 27-11-2022
 * [ ] Backend: Authentication
 * [ ] Backend: Tests
 * [ ] Backend: Migrations
