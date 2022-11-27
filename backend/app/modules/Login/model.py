@@ -1,15 +1,10 @@
 from typing import Optional
-from xmlrpc.client import boolean
 from tools import map_name_to_table
-from config import settings
 from sqlmodel import Field, SQLModel, Relationship, Column, String, Field
 from pydantic import EmailStr, validator
 from hashlib import sha256
 
 import re
-
-Tb = settings.app.Tb
-
 
 @map_name_to_table
 class Login(SQLModel, table=True):

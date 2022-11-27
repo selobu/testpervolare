@@ -1,11 +1,6 @@
 from typing import Optional
 from tools import map_name_to_table
-from config import settings
-from sqlmodel import Field, SQLModel, Relationship, Column, String, Field
-from pydantic import EmailStr, Optional
-
-Tb = settings.app.Tb
-
+from sqlmodel import Field, SQLModel, Column, String, Field
 
 @map_name_to_table
 class User(SQLModel, table=True):
