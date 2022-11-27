@@ -8,33 +8,35 @@ if abspath(cp) not in path:
     path.append(abspath(cp))
 
 from fastapi import FastAPI
-from tools import  Tb
+from tools import Tb
 from fastapi.middleware.cors import CORSMiddleware
 from config import settings
 from sqlmodel import create_engine
 from imp_modules import modulesResolver
 
 app = FastAPI(
-    title= settings.api_name,
-    version= settings.version,
-    description= settings.api_description,
-    contact= settings.api_contact,
-    license_info={'name': 'GPL V3',
-                  'url': 'https://www.gnu.org/licenses/gpl-3.0.en.html'})
+    title=settings.api_name,
+    version=settings.version,
+    description=settings.api_description,
+    contact=settings.api_contact,
+    license_info={
+        "name": "GPL V3",
+        "url": "https://www.gnu.org/licenses/gpl-3.0.en.html",
+    },
+)
 
 # making app globally available by calling settings
 settings.app = app
-setattr(app,'Tb', Tb)
+setattr(app, "Tb", Tb)
 
 # select between SQLALCHEMY and MYsql engine
-USESQLALCMEHY=False
-if len(settings.database_user_uri.split('None')) > 4:
-    USESQLALCMEHY=True
+USESQLALCMEHY = False
+if len(settings.database_user_uri.split("None")) > 4:
+    USESQLALCMEHY = True
     engine = create_engine(settings.database_uri)
 else:
     engine = create_engine(settings.database_user_uri)
 settings.engine = engine
-
 
 modulesResolver(app)
 
