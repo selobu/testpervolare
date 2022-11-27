@@ -1,22 +1,19 @@
 # coding: utf-8
 from sys import path
 from pathlib import Path
-from os.path import abspath, isfile, exists
+from os.path import abspath
 
-if abspath('.') not in path:
-    path.append(abspath('.'))
+cp = Path(__file__).parent
+if abspath(cp) not in path:
+    path.append(abspath(cp))
 
 from fastapi import FastAPI, HTTPException, Depends
-from fastapi import APIRouter
 from fastapi.security import OAuth2PasswordRequestForm
-from fake import createusers, setpqroptions
 from tools import  Tb, digest
 from fastapi.middleware.cors import CORSMiddleware
 from config import settings
-from sqlmodel import create_engine, SQLModel, Session, select
-import modules
-import importlib
-import pkgutil
+from sqlmodel import create_engine, Session, select
+from imp_modules import modulesResolver
 
 USESQLALCMEHY = True
 
@@ -39,29 +36,6 @@ else:
     engine = create_engine(settings.database_user_uri) 
     
 settings.engine = engine
-
-def _import_submodules(module,item='model'):
-    """Import all submodules of a module, recursively."""
-    res = []
-    for loader, module_name, is_pkg in pkgutil.walk_packages(
-            module.__path__, module.__name__ + '.'):
-        if is_pkg:
-            try:
-                importlib.import_module(f'{module_name}.{item}')
-            except:
-                print(f'No se pudo importar  {module_name}.{item}')
-            res.append(module_name.split('.')[1])
-    return res
-
-def modulesResolver(app, enabled_modules=None, **kwargs):
-    enabled_modules = _import_submodules(modules, 'model')
-    # Import router endpoints
-    for module_name in enabled_modules:
-        route = importlib.import_module(f'modules.{module_name}.routes', package=__name__)
-        for element in dir(route):
-            attr =  getattr(route, element)
-            if isinstance(attr, APIRouter):
-                app.include_router(attr)
 
 modulesResolver(app)
 
