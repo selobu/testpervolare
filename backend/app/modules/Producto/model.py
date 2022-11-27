@@ -1,6 +1,5 @@
 from datetime import date
 from typing import Optional
-from xmlrpc.client import boolean
 from tools import map_name_to_table
 from sqlmodel import Field, SQLModel, Column, String,\
     Field, Float, Date

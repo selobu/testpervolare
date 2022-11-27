@@ -17,7 +17,7 @@ class Atributo(SQLModel, table=True):
     createDate: date = Field(sa_column=Column(Date))
     UpdateDate: date = Field(sa_column=Column(Date))
     softDelete: Optional[date] = Field(default=None, sa_column=Column(Date))
-
+    
     @validator("name")
     def name_validator(cls, v):
         if not (len(v) >= 2 and len(v) <= 10):
