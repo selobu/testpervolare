@@ -2,8 +2,9 @@
 from os import environ
 from sys import path
 from os.path import abspath
-if abspath('.') not in path:
-    path.append(abspath('.'))
+
+if abspath(".") not in path:
+    path.append(abspath("."))
 from fake import createusers, setpqroptions
 from main import Tb, settings
 from sqlmodel import create_engine, SQLModel

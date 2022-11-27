@@ -1,6 +1,6 @@
-from fastapi import status, Depends, HTTPException,\
-    APIRouter
+from fastapi import status, Depends, HTTPException, APIRouter
 from fastapi.security import OAuth2PasswordBearer
+
 # from fake import fake_users_db
 from tools import paginate_parameters
 from typing import Union, List
