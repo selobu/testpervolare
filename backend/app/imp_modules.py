@@ -15,7 +15,8 @@ def _import_submodules(module, item="model"):
         if is_pkg:
             try:
                 importlib.import_module(f"{module_name}.{item}")
-            except:
+            except Exception as e:
+                print(e)
                 print(f"No se pudo importar  {module_name}.{item}")
             res.append(module_name.split(".")[1])
     return res
