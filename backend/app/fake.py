@@ -22,8 +22,7 @@ def create_users():
     Tb = settings.app.Tb
     default_users = [
         {
-            "nombres": "selobu",
-            "apellidos": "John Doe",
+            "nombre_completo": "selobu Perez Doe",
             "cedula": "123213",
             "departamento": "Cundinamarca",
             "municipio": "cota",
@@ -31,8 +30,7 @@ def create_users():
             "activo": True,
         },
         {
-            "nombres": "johndoe",
-            "apellidos": "John Doe",
+            "nombre_completo": "johndo Mendez",
             "cedula": "123214",
             "departamento": "Cundinamarca",
             "municipio": "cota",
