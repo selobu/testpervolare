@@ -7,15 +7,12 @@ cp = Path(__file__).parent
 if abspath(cp) not in path:
     path.append(abspath(cp))
 
-from fastapi import FastAPI, HTTPException, Depends
-
+from fastapi import FastAPI
 from tools import  Tb
 from fastapi.middleware.cors import CORSMiddleware
 from config import settings
-from sqlmodel import create_engine, Session, select
+from sqlmodel import create_engine
 from imp_modules import modulesResolver
-
-USESQLALCMEHY = True
 
 app = FastAPI(
     title= settings.api_name,
@@ -29,12 +26,15 @@ app = FastAPI(
 settings.app = app
 setattr(app,'Tb', Tb)
 
-# Select engine
-if USESQLALCMEHY:
+# select between SQLALCHEMY and MYsql engine
+USESQLALCMEHY=False
+if len(settings.database_user_uri.split('None')) > 4:
+    USESQLALCMEHY=True
     engine = create_engine(settings.database_uri)
 else:
-    engine = create_engine(settings.database_user_uri)   
+    engine = create_engine(settings.database_user_uri)
 settings.engine = engine
+
 
 modulesResolver(app)
 
