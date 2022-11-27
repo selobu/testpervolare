@@ -8,8 +8,7 @@ import re
 
 @map_name_to_table
 class Login(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    email: EmailStr = Field(sa_column=Column(String(50)))
+    email: EmailStr = Field(sa_column=Column(String(50)), primary_key=True)
     password: str = Field(sa_column=Column(String(300)))
     user_id: Optional[str] = Field(default=None, foreign_key="user.id")
 
