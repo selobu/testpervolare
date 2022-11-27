@@ -19,13 +19,15 @@ router = APIRouter(
 Tb = settings.app.Tb
 engine = settings.engine
 
-@router.post("/", response_model = Tb.User, status_code=status.HTTP_201_CREATED)
+
+@router.post("/", response_model=Tb.User, status_code=status.HTTP_201_CREATED)
 async def registrar_user(user: Tb.User, token: str = Depends(oauth2_scheme)):
     with Session(engine) as session:
         session.add(user)
         session.commit()
         session.refresh(user)  # updating the id
     return user
+
 
 def get_user(email: str):
     with Session(engine) as session:
@@ -54,7 +56,10 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 
 async def get_current_active_user(current_user: Tb.User = Depends(get_current_user)):
     if not current_user.activo:
-        raise HTTPException(status_code=400, detail="Inactive user please contact the administrator at admin_mail@mail.com")
+        raise HTTPException(
+            status_code=400,
+            detail="Inactive user please contact the administrator at admin_mail@mail.com",
+        )
     return current_user
 
 
