@@ -18,6 +18,7 @@ Repository status
 * [x] Docker: Backend. 26-11-2022
 * [x] Backend: model. 27-11-2022
 * [x] Backend: Model fields validation. 27-11-2022
+* [x] Github: lint - using black 
 * [ ] Backend: Routes
 * [ ] Backend: Authentication
 * [ ] Backend: Tests
