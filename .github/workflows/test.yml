@@ -24,47 +24,14 @@ jobs:
         uses: actions/checkout@v2
       - name: Install dependencies
         run: |
+          cd backend
           python -m pip install --upgrade pip
           pip install ".[test]"
       - name: Test with inv
-        run: inv cover qa
+        run: |
+          cd backend
+          inv cover qa
       - name: Codecov
         uses: codecov/codecov-action@v1
         with:
-          file: ./coverage.xml
-  bench:
-    needs: unit-tests
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-    steps:
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v1
-        with:
-          python-version: "3.8"
-      - name: Checkout ${{ github.base_ref }}
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.base_ref}}
-          path: base
-      - name: Checkout ${{ github.ref }}
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.ref}}
-          path: ref
-      - name: Install dev dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -e "base[dev]"
-      - name: Install ci dependencies for ${{ github.base_ref }}
-        run: pip install -e "base[ci]"
-      - name: Benchmarks for ${{ github.base_ref }}
-        run: |
-          cd base
-          inv benchmark --max-time 4 --save
-          mv .benchmarks ../ref/
-      - name: Install ci dependencies for ${{ github.ref }}
-        run: pip install -e "ref[ci]"
-      - name: Benchmarks for ${{ github.ref }}
-        run: |
-          cd ref
-          inv benchmark --max-time 4 --compare
+          file: ./backend/coverage.xml
