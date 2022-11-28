@@ -1,6 +1,6 @@
 from fastapi import status, Depends, HTTPException, APIRouter
 from fastapi.security import OAuth2PasswordBearer
-from tools import paginate_parameters
+from tools import paginate_parameters, digest
 from typing import Union, List
 from config import settings
 from sqlmodel import Session, select, SQLModel
@@ -29,6 +29,7 @@ def regfromclass(value, clase: SQLModel):
 async def registrar_user(user: Tb.UserRegister):
     with Session(engine) as session:
         usr = regfromclass(user, Tb.User)
+        usr.password = digest(usr.password)
         login = regfromclass(user, Tb.Login)
         login.user = usr
         session.add(login)

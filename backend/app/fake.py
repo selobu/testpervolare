@@ -14,7 +14,7 @@ def create_emails(users: list[int], emails: list, passwords: list):
         # testing under heroku server
         # raise Exception(dumps(session.exec(select(Tb.User.correo)).all()))
         toadd = [
-            {"email": email, "password": password, "user_id": user}
+            {"email": email, "password": digest(password), "user_id": user}
             for user, email, password in zip(users, emails, passwords)
             if user not in not2add
         ]
