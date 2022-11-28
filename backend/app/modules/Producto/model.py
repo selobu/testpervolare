@@ -10,7 +10,7 @@ import re
 
 @map_name_to_table
 class Producto(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True, description="UUID 4 ")
+    id: Optional[str] = Field(default=None, primary_key=True, description="UUID 4 ")
     name: str = Field(unique=True, sa_column=Column(String(10)), max_length=10, min_length=2, description="Only alphanumeric values allowed")
     value: float = Field(sa_column=Column(Float()), gt=0, le=9_999_999_999, description="Product value")
     description: str = Field(sa_column=Column(String(500)), description="Product description. Only alphanumeric values",  min_length=10, max_length=500)

@@ -19,8 +19,8 @@ router = APIRouter(
 
 Tb = settings.app.Tb
 engine = settings.engine
-u=lambda *args: args
 
+@router.post('/', response_model=Tb.Producto, status_code=status.HTTP_201_CREATED)
 def registrar_producto(product: Tb.Producto):
     with Session(engine) as session:
         session.add(product)

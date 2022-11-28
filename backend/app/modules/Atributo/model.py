@@ -15,7 +15,7 @@ class Atributo(SQLModel, table=True):
     name: str = Field(sa_column=Column(String(10)), description="name", max_length=10, min_length=2)
     type: str = Field(sa_column=Column(String(10)), description="Attribute type  allowed Color|Tala|Marca|Fabrica")
     createDate: date = Field(sa_column=Column(Date), description="Creation date")
-    UpdateDate: date = Field(sa_column=Column(Date), descripton="Update Date")
+    UpdateDate: date = Field(sa_column=Column(Date), description="Update Date")
     softDelete: Optional[date] = Field(default=None, sa_column=Column(Date), description="Softdelete date")
     @validator("id")
     def uuid_validator(cls, v):
