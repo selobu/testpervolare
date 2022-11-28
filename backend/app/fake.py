@@ -6,16 +6,18 @@ from tools import digest
 from json import dumps
 
 
-
-def create_emails(users: list[int], emails:list, passwords:list):
+def create_emails(users: list[int], emails: list, passwords: list):
     Tb = settings.app.Tb
     with Session(settings.engine) as session:
-        not2add = select(Tb.Login.user_id).\
-            filter(Tb.Login.user_id.in_(users))
+        not2add = select(Tb.Login.user_id).filter(Tb.Login.user_id.in_(users))
         not2add = session.exec(not2add).all()
         # testing under heroku server
         # raise Exception(dumps(session.exec(select(Tb.User.correo)).all()))
-        toadd = [{'email':email, 'password':password, 'user_id':user} for user, email, password in zip(users, emails, passwords)  if user not in not2add]
+        toadd = [
+            {"email": email, "password": password, "user_id": user}
+            for user, email, password in zip(users, emails, passwords)
+            if user not in not2add
+        ]
         for logindata in toadd:
             session.add(Tb.Login(**logindata))
         session.commit()
@@ -43,8 +45,9 @@ def create_users():
     ]
     nombres = [u["nombre_completo"] for u in default_users]
     with Session(settings.engine) as session:
-        not2add = select(Tb.User.nombre_completo).\
-            filter(Tb.User.nombre_completo.in_(nombres))
+        not2add = select(Tb.User.nombre_completo).filter(
+            Tb.User.nombre_completo.in_(nombres)
+        )
         not2add = session.exec(not2add).all()
         # testing under heroku server
         # raise Exception(dumps(session.exec(select(Tb.User.correo)).all()))
@@ -56,6 +59,7 @@ def create_users():
         session.commit()
         [session.refresh(r) for r in res]
     return [r.id for r in res]
+
 
 def fake_hash_password(password: str):
     return "fakehashed" + password
