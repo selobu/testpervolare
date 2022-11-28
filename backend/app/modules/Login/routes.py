@@ -5,8 +5,7 @@ from fastapi.security import OAuth2PasswordBearer
 from tools import paginate_parameters
 from typing import Union, List
 from config import settings
-from sqlalchemy.orm import Session
-from sqlalchemy import select
+from sqlmodel import Session, select
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -25,7 +24,7 @@ engine = settings.engine
 def get_user(email: str):
     with Session(engine) as session:
         res = select(Tb.User).filter(Tb.User.correo == email)
-        res = session.execute(res).first()
+        res = session.exec(res).first()
         if res is not None:
             return res
         raise HTTPException(status_code=404, detail="Usuario no encontradp")

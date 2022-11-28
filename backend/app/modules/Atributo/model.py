@@ -1,21 +1,16 @@
 from typing import Optional
 from tools import map_name_to_table, uuid_isvalid
 from config import settings
-from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import String, Date
+from sqlmodel import Field, SQLModel, Column, String, Field, Date
 from uuid import uuid4
 from datetime import date
 from pydantic import validator
 import re
 
 Tb = settings.app.Tb
-Base = settings.Base
-
 
 
 @map_name_to_table
-<<<<<<< HEAD
-<<<<<<< HEAD
 class Atributo(SQLModel, table=True):
     id: Optional[str] = Field(primary_key=True, description="UUID 4")
     name: str = Field(
@@ -52,31 +47,6 @@ class Atributo(SQLModel, table=True):
         if v not in allowed:
             raise ValueError(f"type incorrect, only allowed {allowed}")
         return v
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-
-a = 1
->>>>>>> b56f21e (black apply)
-=======
->>>>>>> 9c4c16a (readme update)
-
-
-@map_name_to_table
-class AtributoModify(SQLModel):
-    name: str = Field(
-        sa_column=Column(String(10)), description="name", max_length=10, min_length=2
-    )
-    type: str = Field(
-        sa_column=Column(String(10)),
-        description="Attribute type  allowed Color|Tala|Marca|Fabrica",
-    )
-    createDate: date = Field(sa_column=Column(Date), description="Creation date")
-    UpdateDate: date = Field(sa_column=Column(Date), description="Update Date")
-    softDelete: Optional[date] = Field(
-        default=None, sa_column=Column(Date), description="Softdelete date"
-    )
 
 
 @map_name_to_table
