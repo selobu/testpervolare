@@ -5,7 +5,6 @@ from fastapi.security import OAuth2PasswordBearer
 from tools import paginate_parameters
 from typing import Union
 from config import settings
-from sqlmodel import Session, select
 from fastapi.security import OAuth2PasswordRequestForm
 from tools import digest
 
@@ -35,7 +34,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     # getting the user
     with Session(engine) as session:
         res = select(Tb.User).filter(Tb.User.correo == form_data.username)
-        user = session.exec(res).first()
+        user = session.execute(res).first()
         if user is None:
             HTTPException(status_code=404, detail="Usuario no encontrado")
     if digest(form_data.password) != user.password:

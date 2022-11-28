@@ -4,12 +4,18 @@ from tools import paginate_parameters
 from typing import Union, List
 from config import settings
 <<<<<<< HEAD
+<<<<<<< HEAD
 from sqlmodel import Session, select
 =======
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 from pydantic import BaseModel
 >>>>>>> a0471f2 (adjust system)
+=======
+from sqlalchemy.orm import Session
+from sqlalchemy import select
+from pydantic import BaseModel
+>>>>>>> 751ea766ead9c6788c40bfd5f8f3d0e8a395bca5
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -23,10 +29,15 @@ router = APIRouter(
 
 Tb = settings.app.Tb
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 Pyd = settings.app.Pyd
 Base = settings.Base
 >>>>>>> a0471f2 (adjust system)
+=======
+Pyd = settings.app.Pyd
+Base = settings.Base
+>>>>>>> 751ea766ead9c6788c40bfd5f8f3d0e8a395bca5
 engine = settings.engine
 u = lambda *args: args
 

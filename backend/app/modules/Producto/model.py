@@ -3,9 +3,12 @@ from datetime import datetime
 from typing import Optional
 from tools import map_name_to_table
 from sqlmodel import Field, SQLModel, Column, String, Field, Float, Date, Integer
-from uuid import uuid4
 from pydantic import validator
+from uuid import uuid4
 import re
+from config import settings
+
+Base = settings.Base
 
 
 @map_name_to_table
@@ -82,7 +85,17 @@ class Producto(Base):
 
 
 @map_name_to_table
+<<<<<<< HEAD
 class ProductAttribute(Base):
     __tablename__= 'productattribute'
     product_id: Mapped[str] = mapped_column(ForeignKey("producto.id"), primary_key=True)
     attribute_id: Mapped[str] = mapped_column(ForeignKey("atributo.id"), primary_key=True)
+=======
+class ProductoModify(SQLModel):
+    name: str = Field(sa_column=Column(String(10)))
+    value: float = Field(sa_column=Column(Float()))
+    description: str = Field(sa_column=Column(String(500)))
+    softDelete: Optional[date] = Field(
+        default=None, sa_column=Column(Date())
+    )
+>>>>>>> 751ea766ead9c6788c40bfd5f8f3d0e8a395bca5
