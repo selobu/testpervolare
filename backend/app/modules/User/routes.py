@@ -4,6 +4,7 @@ from tools import paginate_parameters
 from typing import Union, List
 from config import settings
 from pydantic import BaseModel
+from sqlalchemy.orm import Session
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 

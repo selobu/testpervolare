@@ -50,6 +50,7 @@ def create_users():
             Tb.User.nombre_completo.in_(nombres)
         )
         not2add = session.execute(not2add).all()
+        not2add = [x for l in not2add for x in l]
         # testing under heroku server
         # raise Exception(dumps(session.execute(select(Tb.User.correo)).all()))
         toadd = [usr for usr in default_users if usr["nombre_completo"] not in not2add]
