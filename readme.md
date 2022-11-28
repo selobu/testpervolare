@@ -38,5 +38,3 @@ Repository status
 * [ ] Backend: Tests
 * [ ] Backend: Migrations
 * [ ] Frontend
-
-
