@@ -21,38 +21,25 @@ Tb = settings.app.Tb
 engine = settings.engine
 u=lambda *args: args
 
-@router.post("/", response_model=Tb.User, status_code=status.HTTP_201_CREATED)
-async def registrar_user(user: Tb.UserRegister):
+def registrar_producto(product: Tb.Producto):
     with Session(engine) as session:
-        usr = u(user, Tb.User)
-        login = u(user, Tb.Login)
-        login.user = usr
-        session.add(login)
+        session.add(product)
         session.commit()
-        session.refresh(usr)
-    return usr
-if False:
-
-    
-    def registrar_producto(product: Tb.Producto):
-        with Session(engine) as session:
-            session.add(product)
-            session.commit()
-            session.refresh(product)
-        return product
+        session.refresh(product)
+    return product
 
 
-    @router.put(
-        "/{product_id}", response_model=Tb.Producto, status_code=status.HTTP_202_ACCEPTED
-    )
-    def modificar_producto(product_id: int, productnew: Tb.ProductModify):
-        with Session(engine) as session:
-            res = select(Tb.Producto).filter(Tb.Producto.id == product_id)
-            product = session.exec(res).one()
-            for key in productnew.__fields__:
-                if hasattr(product,key):
-                    setattr(product,key, getattr(productnew, key))
-            session.add(product)
-            session.commit()
-            session.refresh(product)
-        return product
+@router.put(
+    "/{product_id}", response_model=Tb.Producto, status_code=status.HTTP_202_ACCEPTED
+)
+def modificar_producto(product_id: int, productnew: Tb.ProductoModify):
+    with Session(engine) as session:
+        res = select(Tb.Producto).filter(Tb.Producto.id == product_id)
+        product = session.exec(res).one()
+        for key in productnew.__fields__:
+            if hasattr(product,key):
+                setattr(product,key, getattr(productnew, key))
+        session.add(product)
+        session.commit()
+        session.refresh(product)
+    return product

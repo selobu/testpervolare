@@ -8,9 +8,9 @@ import re
 
 @map_name_to_table
 class Login(SQLModel, table=True):
-    email: Optional[EmailStr] = Field(default=None, primary_key=True)
-    password: str = Field(sa_column=Column(String(300)), nullable=False)
-    user_id: Optional[int] = Field(default=None, foreign_key="user.id")
+    email: Optional[EmailStr] = Field(default=None, primary_key=True, description="Use email")
+    password: str = Field(sa_column=Column(String(300)), nullable=False, description="User password only allowed a-z A-Z 0-9 and */+-$%&")
+    user_id: Optional[int] = Field(default=None, foreign_key="user.id", description="user id")
     user: Optional["User"] = Relationship(back_populates="login")
 
     @validator("password")
