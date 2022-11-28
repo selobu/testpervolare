@@ -19,3 +19,28 @@ router = APIRouter(
 
 Tb = settings.app.Tb
 engine = settings.engine
+
+
+@router.post("/", response_model=Tb.Producto, status_code=status.HTTP_201_CREATED)
+def registrar_producto(product: Tb.Producto):
+    with Session(engine) as session:
+        session.add(product)
+        session.commit()
+        session.refresh(product)
+    return product
+
+
+@router.put(
+    "/{product_id}", response_model=Tb.Producto, status_code=status.HTTP_202_ACCEPTED
+)
+def modificar_producto(product_id: int, productnew: Tb.ProductModify):
+    with Session(engine) as session:
+        res = select(Tb.Producto).filter(Tb.Producto.id == product_id)
+        product = session.exec(res).one()
+        for key in productnew.__fields__:
+            if hasattr(product,key):
+                setattr(product,key, getattr(productnew, key))
+        session.add(product)
+        session.commit()
+        session.refresh(product)
+    return product

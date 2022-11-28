@@ -1,5 +1,4 @@
 from datetime import date
-from datetime import datetime
 from typing import Optional
 from tools import map_name_to_table
 from sqlmodel import Field, SQLModel, Column, String, Field, Float, Date
@@ -14,9 +13,11 @@ class Producto(SQLModel, table=True):
     name: str = Field(unique=True, sa_column=Column(String(10)))
     value: float = Field(sa_column=Column(Float))
     description: str = Field(sa_column=Column(String(500)))
-    createDate: date = Field(default=date.today ,sa_column=Column(Date))
+    createDate: date = Field(default=date.today, sa_column=Column(Date))
     updateDate: date = Field(default=None, sa_column=Column(Date))
-    softDelete: Optional[date] = Field(default=None, default=None, sa_column=Column(Date))
+    softDelete: Optional[date] = Field(
+        default=None, sa_column=Column(Date)
+    )
 
     @validator("name")
     def name_validator(cls, v):
@@ -43,3 +44,13 @@ class Producto(SQLModel, table=True):
 class ProductAttribute(SQLModel, table=True):
     product_id: str = Field(default=None, foreign_key="producto.id", primary_key=True)
     attribute_id: str = Field(default=None, foreign_key="atributo.id", primary_key=True)
+
+
+@map_name_to_table
+class ProductModify(SQLModel):
+    name: str = Field(sa_column=Column(String(10)))
+    value: float = Field(sa_column=Column(Float))
+    description: str = Field(sa_column=Column(String(500)))
+    softDelete: Optional[date] = Field(
+        default=None, sa_column=Column(Date)
+    )
