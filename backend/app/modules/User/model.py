@@ -1,6 +1,7 @@
-from typing import Optional
+from typing import Optional, List
 from tools import map_name_to_table
-from sqlmodel import Field, SQLModel, Column, String, Field
+from sqlmodel import Field, SQLModel, Column, String, Field,\
+    Relationship
 from pydantic import EmailStr
 
 @map_name_to_table
@@ -12,6 +13,8 @@ class User(SQLModel, table=True):
     municipio: str = Field(sa_column=Column(String(200)))
     direccion: str = Field(sa_column=Column(String(250)))
     activo: bool = True
+    login: List["Login"] = Relationship(back_populates="user")
+
 
 @map_name_to_table
 class UserRegister(SQLModel):

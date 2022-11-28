@@ -34,6 +34,7 @@ Repository status
 * [x] Backend: Added two users by default, to be used to test the auth. 27-11-2022
 * [x] Backend: Authentication
 * [x] Backend: Registering users by themselves
+* [ ] Backend: Endpoints Products
 * [ ] Backend: Tests
 * [ ] Backend: Migrations
 * [ ] Frontend

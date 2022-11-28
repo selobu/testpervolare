@@ -30,12 +30,7 @@ async def registrar_user(user: Tb.UserRegister):
     with Session(engine) as session:
         usr = regfromclass(user, Tb.User)
         login = regfromclass(user, Tb.Login)
-        session.add(login)
-        session.commit()
-        session.add(usr)
-        session.commit()
-        session.refresh(usr)  # updating the id
-        login.user_id = usr.id
+        login.user = usr
         session.add(login)
         session.commit()
         session.refresh(usr)
