@@ -7,7 +7,8 @@ import re
 class Producto(BaseModel):
     id: Optional[str]= Field(description='UUID in the format xxxxx-xxxxx-xxxx-xxxx')
     name: str = Field(description='Product name, only alphanumeric values')
-    value: int = Field(description='Float values with maximum 10 digits included decimal point readed as a point')
+    value: float = Field(description='Float values with maximum 10 digits included decimal point readed as a point',
+                         min=0.01, max= 9_999_999_999)
     description: str = Field(description='Product description', max_length=500, min_length=10)
     @validator("name")
     def name_validator(cls, v):
@@ -18,7 +19,7 @@ class Producto(BaseModel):
 
     @validator("value")
     def value_validator(cls, v):
-        assert v > 0
+        assert v > 0 and v < 9_999_999_999
         return v
 
     @validator("description")
