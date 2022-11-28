@@ -1,7 +1,7 @@
 from datetime import date
 from datetime import datetime
 from typing import Optional
-from tools import map_name_to_table
+from tools import map_name_to_table, uuid_isvalid
 from sqlmodel import Field, SQLModel, Column, String, Field, Float, Date, Integer
 from uuid import uuid4
 from pydantic import validator
@@ -22,12 +22,11 @@ class Producto(SQLModel, table=True):
     @validator("id")
     def uuid_validator(cls, v):
         if v is not None:
-            res = re.findall('[0-9a-f]{12}4[0-9a-f]{3}[89ab][0-9a-f]{15}\Z',v )
-            res = ''.join(res)
-            assert len(res) == len(v)
+            if not uuid_isvalid(v):
+                raise ValueError('invalud uuid 4')
             return v
         else:
-            return uuid4()
+            return str(uuid4())
     
     @validator("name")
     def name_validator(cls, v):

@@ -2,7 +2,7 @@ from fastapi import status, Depends, HTTPException, APIRouter
 from fastapi.security import OAuth2PasswordBearer
 
 # from fake import fake_users_db
-from tools import paginate_parameters
+from tools import paginate_parameters, force_check
 from typing import Union, List
 from config import settings
 from sqlmodel import Session, select
@@ -24,6 +24,7 @@ engine = settings.engine
 @router.post("/", response_model=Tb.Producto, status_code=status.HTTP_201_CREATED)
 def registrar_producto(product: Tb.Producto):
     with Session(engine) as session:
+        product = force_check(product, Tb.Producto)
         session.add(product)
         session.commit()
         session.refresh(product)
