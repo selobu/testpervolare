@@ -10,15 +10,13 @@ import re
 
 @map_name_to_table
 class Producto(SQLModel, table=True):
-    id: Optional[str] = Field(default=None, primary_key=True, description="UUID 4 ")
+    id: Optional[str] = Field(default=None, primary_key=True, description="UUID 4")
     name: str = Field(unique=True, sa_column=Column(String(10)), max_length=10, min_length=2, description="Only alphanumeric values allowed")
     value: float = Field(sa_column=Column(Float()), gt=0, le=9_999_999_999, description="Product value")
     description: str = Field(sa_column=Column(String(500)), description="Product description. Only alphanumeric values",  min_length=10, max_length=500)
     createDate: Optional[date] = Field( sa_column=Column(Date()), description="Creation date")
     updateDate: Optional[date] = Field( sa_column=Column(Date()), description="Update date")
-    softDelete: Optional[date] = Field(
-        default=None, sa_column=Column(Date()), description="SoftDelete date" 
-    )
+    softDelete: Optional[date] = Field( default=None, sa_column=Column(Date()), description="SoftDelete date")
     @validator("id")
     def uuid_validator(cls, v):
         if v is not None:
@@ -27,10 +25,10 @@ class Producto(SQLModel, table=True):
             return v
         else:
             return str(uuid4())
-    
+
     @validator("name")
     def name_validator(cls, v):
-        res = "".join(re.findall("([0-9]*[a-zA-Z]+[0-9]*)", v))
+        res = "".join(re.findall("([0-9]*[a-zA-Z]*[0-9]*)", v))
         if len(res) != len(v):
             raise ValueError("only allowed charactes and numerical values")
         return v
@@ -57,9 +55,10 @@ class ProductAttribute(SQLModel, table=True):
 
 @map_name_to_table
 class ProductoModify(SQLModel):
-    name: str = Field(sa_column=Column(String(10)))
-    value: float = Field(sa_column=Column(Float()))
-    description: str = Field(sa_column=Column(String(500)))
-    softDelete: Optional[date] = Field(
-        default=None, sa_column=Column(Date())
-    )
+    name: str = Field(unique=True, sa_column=Column(String(10)), max_length=10, min_length=2, description="Only alphanumeric values allowed")
+    value: float = Field(sa_column=Column(Float()), gt=0, le=9_999_999_999, description="Product value")
+    description: str = Field(sa_column=Column(String(500)), description="Product description. Only alphanumeric values",  min_length=10, max_length=500)
+    createDate: Optional[date] = Field( sa_column=Column(Date()), description="Creation date")
+    updateDate: Optional[date] = Field( sa_column=Column(Date()), description="Update date")
+    softDelete: Optional[date] = Field( default=None, sa_column=Column(Date()), description="SoftDelete date")
+    
