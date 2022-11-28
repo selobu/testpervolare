@@ -21,7 +21,7 @@ Tb = settings.app.Tb
 engine = settings.engine
 u=lambda *args: args
 
-@router.post("/", response_model=Tb.Producto, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=Tb.User, status_code=status.HTTP_201_CREATED)
 async def registrar_user(user: Tb.UserRegister):
     with Session(engine) as session:
         usr = u(user, Tb.User)
