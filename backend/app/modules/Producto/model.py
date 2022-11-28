@@ -1,7 +1,8 @@
 from datetime import date
+from datetime import datetime
 from typing import Optional
 from tools import map_name_to_table
-from sqlmodel import Field, SQLModel, Column, String, Field, Float, Date
+from sqlmodel import Field, SQLModel, Column, String, Field, Float, Date, Integer
 from uuid import uuid4
 from pydantic import validator
 import re
@@ -9,14 +10,14 @@ import re
 
 @map_name_to_table
 class Producto(SQLModel, table=True):
-    id: Optional[int] = Field(default=uuid4, primary_key=True)
+    id: Optional[int] = Field(default=None, primary_key=True)
     name: str = Field(unique=True, sa_column=Column(String(10)))
-    value: float = Field(sa_column=Column(Float))
+    value: float = Field(sa_column=Column(Float()))
     description: str = Field(sa_column=Column(String(500)))
-    createDate: date = Field(default=date.today, sa_column=Column(Date))
-    updateDate: date = Field(default=None, sa_column=Column(Date))
+    createDate: date = Field(sa_column=Column(Date()))
+    updateDate: date = Field(default=None, sa_column=Column(Date()))
     softDelete: Optional[date] = Field(
-        default=None, sa_column=Column(Date)
+        default=None, sa_column=Column(Date())
     )
 
     @validator("name")
@@ -47,10 +48,10 @@ class ProductAttribute(SQLModel, table=True):
 
 
 @map_name_to_table
-class ProductModify(SQLModel):
+class ProductoModify(SQLModel):
     name: str = Field(sa_column=Column(String(10)))
-    value: float = Field(sa_column=Column(Float))
+    value: float = Field(sa_column=Column(Float()))
     description: str = Field(sa_column=Column(String(500)))
     softDelete: Optional[date] = Field(
-        default=None, sa_column=Column(Date)
+        default=None, sa_column=Column(Date())
     )
