@@ -14,11 +14,11 @@ Base = settings.Base
 @map_name_to_table
 class Atributo(Base):
     __tablename__ = "atributo"
-    id: Mapped[str] = mapped_column(default=uuid4, primary_key=True)
+    id: Mapped[Optional[str]] = mapped_column(default=uuid4, primary_key=True)
     name: Mapped[str] = mapped_column(String(10))
     type: Mapped[str] = mapped_column(String(10))
     createDate: Mapped[Optional[date]] = mapped_column(Date)
-    UpdateDate: Mapped[Optional[date]] = mapped_column(Date)
+    updateDate: Mapped[Optional[date]] = mapped_column(Date)
     softDelete: Mapped[Optional[date]] = mapped_column(Date)
 
     @validator("name")
