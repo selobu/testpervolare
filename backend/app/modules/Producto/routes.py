@@ -65,7 +65,7 @@ def leer_productos():
         return products
 
 
-@router.delete("/{product_id}",status_code=status.HTTP_200_OK)
+@router.delete("/{product_id}", status_code=status.HTTP_200_OK)
 def eliminar_producto(product_id: str):
     with Session(engine) as session:
         res = select(Tb.Producto).filter(Tb.Producto.id == product_id)

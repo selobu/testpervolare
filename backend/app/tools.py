@@ -3,8 +3,13 @@ import random
 import hashlib
 from typing import Union
 import re
+
+
 def force_check(table_son, table):
-    return table(**dict((key, getattr(table_son, key)) for key in table_son.__fields__.keys()))
+    return table(
+        **dict((key, getattr(table_son, key)) for key in table_son.__fields__.keys())
+    )
+
 
 def digest(text):
     if isinstance(text, str):
@@ -12,10 +17,15 @@ def digest(text):
     hash_object = hashlib.sha256(text)
     return hash_object.hexdigest()
 
+
 def uuid_isvalid(v):
-    res = re.findall('(^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}\Z)',v )
-    return ''.join(res) == v
-            
+    res = re.findall(
+        "(^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}\Z)",
+        v,
+    )
+    return "".join(res) == v
+
+
 async def paginate_parameters(
     q: Union[str, None] = None, skip: int = 0, limit: int = 20
 ):

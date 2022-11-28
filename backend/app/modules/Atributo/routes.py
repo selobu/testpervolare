@@ -20,6 +20,7 @@ router = APIRouter(
 Tb = settings.app.Tb
 engine = settings.engine
 
+
 @router.post("/", response_model=Tb.Atributo, status_code=status.HTTP_201_CREATED)
 def registrar_atributo(atributo: Tb.Atributo):
     with Session(engine) as session:
@@ -42,7 +43,7 @@ def modificar_atributo(atribute_id: str, productnew: Tb.AtributoModify):
         atributo = session.exec(res).one()
         for key in productnew.__fields__:
             if hasattr(atributo, key):
-                setattr(atributo,key,getattr(productnew, key))
+                setattr(atributo, key, getattr(productnew, key))
         session.add(atributo)
         session.commit()
         session.refresh(atributo)
@@ -67,7 +68,7 @@ def leer_atributos():
         return atributos
 
 
-@router.delete("/{atribute_id}",status_code=status.HTTP_200_OK)
+@router.delete("/{atribute_id}", status_code=status.HTTP_200_OK)
 def eliminar_atributo(atribute_id: str):
     with Session(engine) as session:
         res = select(Tb.Atributo).filter(Tb.Atributo.id == atribute_id)
