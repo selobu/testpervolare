@@ -19,7 +19,8 @@ router = APIRouter(
 
 Tb = settings.app.Tb
 engine = settings.engine
-u=lambda *args: args
+u = lambda *args: args
+
 
 def registrar_producto(product: Tb.Producto):
     with Session(engine) as session:
@@ -37,8 +38,8 @@ def modificar_producto(product_id: int, productnew: Tb.ProductoModify):
         res = select(Tb.Producto).filter(Tb.Producto.id == product_id)
         product = session.exec(res).one()
         for key in productnew.__fields__:
-            if hasattr(product,key):
-                setattr(product,key, getattr(productnew, key))
+            if hasattr(product, key):
+                setattr(product, key, getattr(productnew, key))
         session.add(product)
         session.commit()
         session.refresh(product)
