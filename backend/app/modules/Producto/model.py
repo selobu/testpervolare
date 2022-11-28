@@ -17,7 +17,7 @@ class Producto(Base):
     id: Mapped[str] = mapped_column(default=uuid4, primary_key=True)
     name: Mapped[str] = mapped_column(String(10))
     value: Mapped[float] = mapped_column(Float)
-    description: Mapped[str] = mapped_column(String(500))
+    description: Mapped[Optional[str]] = mapped_column(String(500))
     createDate: Mapped[date] = mapped_column(Date)
     updateDate: Mapped[date] = mapped_column(Date)
     softDelete: Mapped[date] = mapped_column(Date)
