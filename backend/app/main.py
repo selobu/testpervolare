@@ -8,12 +8,14 @@ if abspath(cp) not in path:
     path.append(abspath(cp))
 
 from fastapi import FastAPI
-from tools import Tb
+from tools import Tb, Pyd
 from fastapi.middleware.cors import CORSMiddleware
 from config import settings
-from sqlmodel import SQLModel, create_engine
+from sqlalchemy import create_engine
+from sqlalchemy.orm import DeclarativeBase
 from imp_modules import modulesResolver
 from fake import create_emails, create_users
+
 
 app = FastAPI(
     title=settings.api_name,
@@ -28,7 +30,17 @@ app = FastAPI(
 
 # making app globally available by calling settings
 settings.app = app
+<<<<<<< HEAD
+<<<<<<< HEAD
 setattr(app, "Tb", Tb)
+=======
+setattr(app, "Tb", Tb)  # models
+setattr(app, "Pyd", Pyd)  # cotrolers
+>>>>>>> b56f21e (black apply)
+=======
+setattr(app, "Tb", Tb)  # models
+setattr(app, "Pyd", Pyd)  # cotrolers
+>>>>>>> 751ea766ead9c6788c40bfd5f8f3d0e8a395bca5
 
 # authentication
 import auth
@@ -42,6 +54,21 @@ else:
     engine = create_engine(settings.database_user_uri)
 settings.engine = engine
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 751ea766ead9c6788c40bfd5f8f3d0e8a395bca5
+
+class Base(DeclarativeBase):
+    pass
+
+
+settings.Base = Base
+<<<<<<< HEAD
+>>>>>>> b56f21e (black apply)
+=======
+>>>>>>> 751ea766ead9c6788c40bfd5f8f3d0e8a395bca5
 modulesResolver(app)
 
 # CORS
@@ -53,7 +80,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 # Create data structure
-SQLModel.metadata.create_all(engine)
+Base.metadata.create_all(engine)
 
 # populate initial data
 users = create_users()

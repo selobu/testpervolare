@@ -31,6 +31,7 @@ class User(SQLModel, table=True):
 
 
 @map_name_to_table
+<<<<<<< HEAD
 class UserRegister(SQLModel):
     nombre_completo: str = Field(
         sa_column=Column(String(400)), unique=True, description="User fullname"
