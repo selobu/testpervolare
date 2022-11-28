@@ -28,7 +28,12 @@ app = FastAPI(
 
 # making app globally available by calling settings
 settings.app = app
+<<<<<<< HEAD
 setattr(app, "Tb", Tb)
+=======
+setattr(app, "Tb", Tb)  # models
+setattr(app, "Pyd", Pyd)  # cotrolers
+>>>>>>> b56f21e (black apply)
 
 # authentication
 import auth
@@ -42,6 +47,15 @@ else:
     engine = create_engine(settings.database_user_uri)
 settings.engine = engine
 
+<<<<<<< HEAD
+=======
+
+class Base(DeclarativeBase):
+    pass
+
+
+settings.Base = Base
+>>>>>>> b56f21e (black apply)
 modulesResolver(app)
 
 # CORS

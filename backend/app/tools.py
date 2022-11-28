@@ -21,8 +21,16 @@ class TbContainer(object):
     pass
 
 
+<<<<<<< HEAD
+=======
+class PydContainer(object):
+    pass
+
+
+>>>>>>> b56f21e (black apply)
 # punto comun para acceder a las tablas
 Tb = TbContainer()
+
 
 
 def map_name_to_table(cls):
@@ -32,6 +40,17 @@ def map_name_to_table(cls):
         raise Exception(f"Ya está declarada la tabla {cls.__name__}")
     setattr(Tb, cls.__name__, cls)
 
+<<<<<<< HEAD
+=======
+
+def map_2_pydantic(cls):
+    # globals()[clase.__name__] = clase
+    # table_mappers['Tb'+clase.__name__] = clase
+    if hasattr(Pyd, cls.__name__):
+        raise Exception(f"Model already declared {cls.__name__}")
+    setattr(Pyd, cls.__name__, cls)
+
+>>>>>>> b56f21e (black apply)
 
 def generate_random(largo=6):
     # https://www.askpython.com/python/examples/generate-random-strings-in-python

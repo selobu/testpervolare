@@ -68,15 +68,21 @@ class Producto(SQLModel, table=True):
         return v
 
 
+
 @map_name_to_table
-class ProductAttribute(SQLModel, table=True):
-    product_id: str = Field(default=None, foreign_key="producto.id", primary_key=True)
-    attribute_id: str = Field(default=None, foreign_key="atributo.id", primary_key=True)
+class Producto(Base):
+    __tablename__ = 'producto'
+    id: Mapped[str] = mapped_column(default=uuid4, primary_key=True)
+    name: Mapped[str] = mapped_column(String(10))
+    value: Mapped[float] = mapped_column(Float)
+    description: Mapped[str] = mapped_column(String(500))
+    createDate: Mapped[date] = mapped_column(Date)
+    updateDate: Mapped[date] = mapped_column(Date)
+    softDelete: Mapped[date] = mapped_column(Date)
 
 
 @map_name_to_table
-class ProductoModify(SQLModel):
-    name: str = Field(sa_column=Column(String(10)))
-    value: float = Field(sa_column=Column(Float()))
-    description: str = Field(sa_column=Column(String(500)))
-    softDelete: Optional[date] = Field(default=None, sa_column=Column(Date()))
+class ProductAttribute(Base):
+    __tablename__= 'productattribute'
+    product_id: Mapped[str] = mapped_column(ForeignKey("producto.id"), primary_key=True)
+    attribute_id: Mapped[str] = mapped_column(ForeignKey("atributo.id"), primary_key=True)

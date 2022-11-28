@@ -29,6 +29,10 @@ class Settings(BaseSettings):
     )
     app: object = {}
     engine: object = {}
+<<<<<<< HEAD
+=======
+    Base: object = {}
+>>>>>>> b56f21e (black apply)
 
 
 settings = Settings()

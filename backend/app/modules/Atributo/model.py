@@ -10,7 +10,9 @@ import re
 Tb = settings.app.Tb
 
 
+
 @map_name_to_table
+<<<<<<< HEAD
 class Atributo(SQLModel, table=True):
     id: Optional[str] = Field(default=None, primary_key=True, description="UUID 4")
     name: str = Field(
@@ -35,6 +37,16 @@ class Atributo(SQLModel, table=True):
             return v
         else:
             return uuid4()
+=======
+class Atributo(Base):
+    __tablename__ = "atributo"
+    id: Mapped[str] = mapped_column(default=uuid4, primary_key=True)
+    name: Mapped[str] = mapped_column(String(10))
+    type: Mapped[str] = mapped_column(String(10))
+    createDate: Mapped[Optional[date]] = mapped_column(Date)
+    UpdateDate: Mapped[Optional[date]] = mapped_column(Date)
+    softDelete: Mapped[Optional[date]] = mapped_column(Date)
+>>>>>>> b56f21e (black apply)
 
     @validator("name")
     def name_validator(cls, v):
@@ -48,3 +60,9 @@ class Atributo(SQLModel, table=True):
         if v not in allowed:
             raise ValueError(f"type incorrect, only allowed {allowed}")
         return v
+<<<<<<< HEAD
+=======
+
+
+a = 1
+>>>>>>> b56f21e (black apply)
