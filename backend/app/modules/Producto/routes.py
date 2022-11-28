@@ -46,3 +46,11 @@ def modificar_producto(product_id: int, productnew: Pyd.Producto):
         session.commit()
         session.refresh(product)
     return product
+
+@router.get("/{product_id}",response_model=Pyd.Producto, status_code=status.HTTP_202_ACCEPTED)
+def get_product(product_id: int):
+    with Session(engine) as session:
+        res = select(Tb.Producto).filter(Tb.Producto.id == product_id)
+        product = session.execute(res).one()
+        return product
+
