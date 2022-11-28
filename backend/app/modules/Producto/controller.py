@@ -16,6 +16,7 @@ class Producto(BaseModel):
         min=0.01,
         max=9_999_999_999,
     )
+    createDate: Optional[date]
     updateDate: date
     softDelete: date
     description: str = Field(

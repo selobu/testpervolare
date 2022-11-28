@@ -14,11 +14,11 @@ Base = settings.Base
 @map_name_to_table
 class Producto(Base):
     __tablename__ = "producto"
-    id: Mapped[str] = mapped_column(default=uuid4, primary_key=True)
+    id: Mapped[str] = mapped_column(default=lambda x: str(uuid4()), primary_key=True)
     name: Mapped[str] = mapped_column(String(10))
     value: Mapped[float] = mapped_column(Float)
     description: Mapped[str] = mapped_column(String(500))
-    createDate: Mapped[date] = mapped_column(Date)
+    createDate: Mapped[Optional[date]] = mapped_column(Date, default=lambda x: date.today())
     updateDate: Mapped[date] = mapped_column(Date)
     softDelete: Mapped[date] = mapped_column(Date)
 
