@@ -23,3 +23,11 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     if digest(password) != currpass:
         raise HTTPException(status_code=400, detail="Invalid password")
     return {"access_token": email, "token_type": "bearer"}
+
+
+@app.get("/")
+def read_root():
+    return {
+        "api": "/docs",
+        "message": "please visit localhost/docs to interact with api",
+    }
