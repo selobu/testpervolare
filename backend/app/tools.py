@@ -36,16 +36,50 @@ class TbContainer(object):
     pass
 
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 751ea766ead9c6788c40bfd5f8f3d0e8a395bca5
+class PydContainer(object):
+    pass
+
+
+<<<<<<< HEAD
+>>>>>>> b56f21e (black apply)
+=======
+>>>>>>> 751ea766ead9c6788c40bfd5f8f3d0e8a395bca5
 # punto comun para acceder a las tablas
 Tb = TbContainer()
+Pyd = PydContainer()
+
 
 
 def map_name_to_table(cls):
     # globals()[clase.__name__] = clase
     # table_mappers['Tb'+clase.__name__] = clase
     if hasattr(Tb, cls.__name__):
-        raise Exception(f"Ya está declarada la tabla {cls.__name__}")
+        raise Exception(f"Table already declared {cls.__name__}")
     setattr(Tb, cls.__name__, cls)
+
+<<<<<<< HEAD
+=======
+
+def map_2_pydantic(cls):
+    # globals()[clase.__name__] = clase
+    # table_mappers['Tb'+clase.__name__] = clase
+    if hasattr(Pyd, cls.__name__):
+        raise Exception(f"Model already declared {cls.__name__}")
+    setattr(Pyd, cls.__name__, cls)
+
+>>>>>>> b56f21e (black apply)
+
+def map_2_pydantic(cls):
+    # globals()[clase.__name__] = clase
+    # table_mappers['Tb'+clase.__name__] = clase
+    if hasattr(Pyd, cls.__name__):
+        raise Exception(f"Model already declared {cls.__name__}")
+    setattr(Pyd, cls.__name__, cls)
 
 
 def generate_random(largo=6):
