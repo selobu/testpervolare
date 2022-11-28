@@ -36,13 +36,13 @@ def registrar_atributo(atributo: Tb.Atributo):
 @router.put(
     "/{atribute_id}", response_model=Tb.Atributo, status_code=status.HTTP_202_ACCEPTED
 )
-def modificar_atributo(atribute_id: str, productnew: Tb.Atributo):
+def modificar_atributo(atribute_id: str, productnew: Tb.AtributoModify):
     with Session(engine) as session:
         res = select(Tb.Atributo).filter(Tb.Atributo.id == atribute_id)
         atributo = session.exec(res).one()
         for key in productnew.__fields__:
             if hasattr(atributo, key):
-                setattr(atributo, key, getattr(productnew, key))
+                setattr(atributo,key,getattr(productnew, key))
         session.add(atributo)
         session.commit()
         session.refresh(atributo)
