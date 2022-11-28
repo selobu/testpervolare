@@ -10,9 +10,10 @@ from pydantic import validator
 Tb = settings.app.Tb
 Base = settings.Base
 
+
 @map_name_to_table
 class Atributo(Base):
-    __tablename__ = 'atributo'
+    __tablename__ = "atributo"
     id: Mapped[str] = mapped_column(default=uuid4, primary_key=True)
     name: Mapped[str] = mapped_column(String(10))
     type: Mapped[str] = mapped_column(String(10))
@@ -32,4 +33,6 @@ class Atributo(Base):
         if v not in allowed:
             raise ValueError(f"type incorrect, only allowed {allowed}")
         return v
-a=1
+
+
+a = 1

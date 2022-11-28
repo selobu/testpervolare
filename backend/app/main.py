@@ -30,8 +30,8 @@ app = FastAPI(
 
 # making app globally available by calling settings
 settings.app = app
-setattr(app, "Tb", Tb) # models
-setattr(app, "Pyd", Pyd) # cotrolers
+setattr(app, "Tb", Tb)  # models
+setattr(app, "Pyd", Pyd)  # cotrolers
 
 # authentication
 import auth
@@ -48,6 +48,7 @@ settings.engine = engine
 
 class Base(DeclarativeBase):
     pass
+
 
 settings.Base = Base
 modulesResolver(app)

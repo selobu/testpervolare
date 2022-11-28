@@ -24,9 +24,11 @@ class TbContainer(object):
 class PydContainer(object):
     pass
 
+
 # punto comun para acceder a las tablas
 Tb = TbContainer()
 Pyd = PydContainer()
+
 
 def map_name_to_table(cls):
     # globals()[clase.__name__] = clase
@@ -34,6 +36,7 @@ def map_name_to_table(cls):
     if hasattr(Tb, cls.__name__):
         raise Exception(f"Table already declared {cls.__name__}")
     setattr(Tb, cls.__name__, cls)
+
 
 def map_2_pydantic(cls):
     # globals()[clase.__name__] = clase
