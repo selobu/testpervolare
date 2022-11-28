@@ -5,7 +5,8 @@ from fastapi.security import OAuth2PasswordBearer
 from tools import paginate_parameters
 from typing import Union, List
 from config import settings
-from sqlmodel import Session, select
+from sqlalchemy.orm import Session
+from sqlalchemy import select
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -18,11 +19,12 @@ router = APIRouter(
 
 
 Tb = settings.app.Tb
+Pyd = settings.app.Pyd
 engine = settings.engine
 
 
-@router.post("/", response_model=Tb.Producto, status_code=status.HTTP_201_CREATED)
-def registrar_producto(product: Tb.Producto):
+@router.post("/", response_model=Pyd.Producto, status_code=status.HTTP_201_CREATED)
+def registrar_producto(product: Pyd.Producto):
     with Session(engine) as session:
         session.add(product)
         session.commit()
@@ -31,9 +33,9 @@ def registrar_producto(product: Tb.Producto):
 
 
 @router.put(
-    "/{product_id}", response_model=Tb.Producto, status_code=status.HTTP_202_ACCEPTED
+    "/{product_id}", response_model=Pyd.Producto, status_code=status.HTTP_202_ACCEPTED
 )
-def modificar_producto(product_id: int, productnew: Tb.ProductModify):
+def modificar_producto(product_id: int, productnew: Pyd.Producto):
     with Session(engine) as session:
         res = select(Tb.Producto).filter(Tb.Producto.id == product_id)
         product = session.exec(res).one()

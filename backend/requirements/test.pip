@@ -15,6 +15,6 @@ uvicorn[standard]
 pydantic[email]
 python-multipart # This is because OAuth2 uses "form data" for sending the username and password.
 gunicorn
-sqlalchemy
+sqlalchemy==2.0.0b3
 sqlmodel
 PyMySQL

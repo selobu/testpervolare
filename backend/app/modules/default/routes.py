@@ -5,7 +5,6 @@ from fastapi.security import OAuth2PasswordBearer
 from tools import paginate_parameters
 from typing import Union
 from config import settings
-from sqlmodel import Session, select
 from fastapi.security import OAuth2PasswordRequestForm
 from tools import digest
 

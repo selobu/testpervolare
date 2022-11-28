@@ -1,7 +1,8 @@
 from config import settings
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi import Depends
-from sqlmodel import Session, select
+from sqlalchemy.orm import Session
+from sqlalchemy import select
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from tools import digest
