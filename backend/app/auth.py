@@ -7,17 +7,15 @@ from fastapi.security import OAuth2PasswordRequestForm
 from tools import digest
 
 app = settings.app
-Tb = app.Tb
 engine = settings.engine
-
-usr = {}
+Tb = app.Tb
 
 
 @app.post("/token")
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     email = form_data.username
     password = form_data.password
-    with Session(engine) as session:
+    with Session(settings.engine) as session:
         res = select(Tb.Login.password).filter(Tb.Login.email==email)
         currpass = session.exec(res).first()
     if currpass is None:

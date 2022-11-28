@@ -32,7 +32,8 @@ Repository status
 * [x] Github: lint - using black.  27-11-2022
 * [x] Github: Added badges to show repository status.  27-11-2022 
 * [x] Backend: Added two users by default, to be used to test the auth. 27-11-2022
-* [ ] Backend: Authentication
+* [x] Backend: Authentication
+* [ ] Backend: Registering users
 * [ ] Backend: Tests
 * [ ] Backend: Migrations
 * [ ] Frontend
