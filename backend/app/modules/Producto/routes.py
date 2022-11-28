@@ -11,8 +11,8 @@ from sqlalchemy import select
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 router = APIRouter(
-    prefix="/Solicitud",
-    tags=["Solicitud"],
+    prefix="/Producto",
+    tags=["Producto"],
     dependencies=[Depends(oauth2_scheme)],
     responses={404: {"description": "Not found"}},
 )

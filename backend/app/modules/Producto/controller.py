@@ -1,12 +1,12 @@
-from pydantic import validator, BaseModel
+from pydantic import validator, BaseModel, Field
 from tools import map_2_pydantic
 import re
 
 @map_2_pydantic
 class Producto(BaseModel):
-    name: str
-    value: int
-    description: str
+    name: str = Field()
+    value: int = Field()
+    description: str = Field()
     @validator("name")
     def name_validator(cls, v):
         res = "".join(re.findall("([0-9]*[a-zA-Z]+[0-9]*)", v))
