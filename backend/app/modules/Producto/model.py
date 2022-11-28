@@ -76,7 +76,7 @@ class Producto(Base):
     name: Mapped[str] = mapped_column(String(10))
     value: Mapped[float] = mapped_column(Float)
     description: Mapped[str] = mapped_column(String(500))
-    createDate: Mapped[date] = mapped_column(Date)
+    createDate: Mapped[Optional[date]] = mapped_column(Date, default=lambda x: date.today())
     updateDate: Mapped[date] = mapped_column(Date)
     softDelete: Mapped[date] = mapped_column(Date)
 
