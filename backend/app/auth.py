@@ -1,24 +1,27 @@
 from config import settings
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi import Depends
-
+from sqlmodel import Session, select
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
+from tools import digest
 
 app = settings.app
 Tb = app.Tb
+engine = settings.engine
 
 usr = {}
 
 
 @app.post("/token")
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):
-    user_dict = usr.get(form_data.username)
-    if not user_dict:
-        raise HTTPException(status_code=400, detail="Incorrect username or password")
-    user = usr(**user_dict)
-    hashed_password = usr(form_data.password)
-    if not hashed_password == user.hashed_password:
-        raise HTTPException(status_code=400, detail="Incorrect username or password")
-
-    return {"access_token": user.username, "token_type": "bearer"}
+    email = form_data.username
+    password = form_data.password
+    with Session(engine) as session:
+        res = select(Tb.Login.password).filter(Tb.Login.email==email)
+        currpass = session.exec(res).first()
+    if currpass is None:
+        raise HTTPException(status_code=400, detail="Incorrect useremail or password")
+    if digest(password) != currpass:
+        raise HTTPException(status_code=400, detail="Invalid password")
+    return {"access_token": email, "token_type": "bearer"}

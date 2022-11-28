@@ -15,9 +15,9 @@ def create_emails(users: list[int], emails:list, passwords:list):
         not2add = session.exec(not2add).all()
         # testing under heroku server
         # raise Exception(dumps(session.exec(select(Tb.User.correo)).all()))
-        toadd = [(email, password, user) for user, email, password in zip(users, emails, passwords)  if user not in not2add]
+        toadd = [{'email':email, 'password':password, 'user_id':user} for user, email, password in zip(users, emails, passwords)  if user not in not2add]
         for logindata in toadd:
-            session.add(Tb.Login(email=logindata[0], password= logindata[1], user_id = logindata[2]))
+            session.add(Tb.Login(**logindata))
         session.commit()
 
 

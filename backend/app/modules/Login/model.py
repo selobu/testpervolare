@@ -9,7 +9,7 @@ import re
 @map_name_to_table
 class Login(SQLModel, table=True):
     email: Optional[EmailStr] = Field(default=None, primary_key=True)
-    password: str = Field(sa_column=Column(String(300)))
+    password: str = Field(sa_column=Column(String(300)), nullable=False)
     user_id: Optional[str] = Field(default=None, foreign_key="user.id")
 
     @validator("password")
