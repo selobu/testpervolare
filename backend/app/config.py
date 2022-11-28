@@ -29,6 +29,7 @@ class Settings(BaseSettings):
     )
     app: object = {}
     engine: object = {}
+    Base: object= {}
 
 
 settings = Settings()

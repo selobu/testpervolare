@@ -3,7 +3,7 @@ from fastapi.security import OAuth2PasswordBearer
 from tools import paginate_parameters
 from typing import Union, List
 from config import settings
-from sqlmodel import Session, select, SQLModel
+from pydantic import BaseModel
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -14,10 +14,11 @@ router = APIRouter(
 )
 
 Tb = settings.app.Tb
+Pyd = settings.app.Pyd
 engine = settings.engine
 
 
-def regfromclass(value, clase: SQLModel):
+def regfromclass(value, clase: BaseModel):
     toset = [r for r in value.__fields__ if r in clase.__fields__]
     res = dict()
     for item in toset:
@@ -25,8 +26,8 @@ def regfromclass(value, clase: SQLModel):
     return clase(**res)
 
 
-@router.post("/", response_model=Tb.User, status_code=status.HTTP_201_CREATED)
-async def registrar_user(user: Tb.UserRegister):
+@router.post("/", response_model=Pyd.User, status_code=status.HTTP_201_CREATED)
+async def registrar_user(user: Pyd.User):
     with Session(engine) as session:
         usr = regfromclass(user, Tb.User)
         login = regfromclass(user, Tb.Login)

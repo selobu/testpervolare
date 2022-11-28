@@ -1,22 +1,24 @@
 from typing import Optional
 from tools import map_name_to_table
 from config import settings
-from sqlmodel import Field, SQLModel, Column, String, Field, Date
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String, Date
 from uuid import uuid4
 from datetime import date
 from pydantic import validator
 
 Tb = settings.app.Tb
-
+Base = settings.Base
 
 @map_name_to_table
-class Atributo(SQLModel, table=True):
-    id: Optional[int] = Field(default=uuid4, primary_key=True)
-    name: str = Field(sa_column=Column(String(10)))
-    type: str = Field(sa_column=Column(String(10)))
-    createDate: date = Field(sa_column=Column(Date))
-    UpdateDate: date = Field(sa_column=Column(Date))
-    softDelete: Optional[date] = Field(default=None, sa_column=Column(Date))
+class Atributo(Base):
+    __tablename__ = 'atributo'
+    id: Mapped[str] = mapped_column(default=uuid4, primary_key=True)
+    name: Mapped[str] = mapped_column(String(10))
+    type: Mapped[str] = mapped_column(String(10))
+    createDate: Mapped[Optional[date]] = mapped_column(Date)
+    UpdateDate: Mapped[Optional[date]] = mapped_column(Date)
+    softDelete: Mapped[Optional[date]] = mapped_column(Date)
 
     @validator("name")
     def name_validator(cls, v):
@@ -30,3 +32,4 @@ class Atributo(SQLModel, table=True):
         if v not in allowed:
             raise ValueError(f"type incorrect, only allowed {allowed}")
         return v
+a=1

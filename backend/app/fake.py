@@ -1,7 +1,8 @@
 # coding:utf-8
 __all__ = ["create_users", "create_emails"]
 from config import settings
-from sqlmodel import Session, select, SQLModel
+from sqlalchemy.orm import Session
+from sqlalchemy import select
 from tools import digest
 from json import dumps
 
