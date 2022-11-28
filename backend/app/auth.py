@@ -17,7 +17,11 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     password = form_data.password
     with Session(settings.engine) as session:
         res = select(Tb.Login.password).filter(Tb.Login.email == email)
+<<<<<<< HEAD
         currpass = session.exec(res).first()
+=======
+        currpass = session.execute(res).first()[0]
+>>>>>>> 9af093b (fixing login)
     if currpass is None:
         raise HTTPException(status_code=400, detail="Incorrect useremail or password")
     if digest(password) != currpass:
