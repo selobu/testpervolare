@@ -21,53 +21,40 @@ Tb = settings.app.Tb
 Pyd = settings.app.Pyd
 Base = settings.Base
 engine = settings.engine
+u=lambda *args: args
 
-
-def regfromclass(value, clase: Base):
-    toset = dict((x,y) for x,y in list(value) if x in clase.metadata.tables[clase.__tablename__].columns.keys())
-    res = dict()
-    for item in toset:
-        res[item] = getattr(value, item)
-    return clase(**res)
-
-def classfromreg(value: Base, clase: BaseModel):
-    value_columns = value.metadata.tables[value.__tablename__].columns.keys()
-    pydantyc_columns = clase.__fields__.keys()
-    toset = [r for r in value_columns if r in pydantyc_columns]
-    res = dict()
-    for item in toset:
-        res[item] = getattr(value, item)
-    return clase(**res)
-
-@router.post("/", response_model=Pyd.Producto, status_code=status.HTTP_201_CREATED)
-def registrar_producto(product: Pyd.Producto):
+@router.post("/", response_model=Tb.User, status_code=status.HTTP_201_CREATED)
+async def registrar_user(user: Tb.UserRegister):
     with Session(engine) as session:
-        pd = regfromclass(product, Tb.Producto)
-        session.add(pd)
+        usr = u(user, Tb.User)
+        login = u(user, Tb.Login)
+        login.user = usr
+        session.add(login)
         session.commit()
-        session.refresh(pd)
-        return classfromreg(pd, Pyd.Producto)
+        session.refresh(usr)
+    return usr
+if False:
 
-
-@router.put(
-    "/{product_id}", response_model=Pyd.Producto, status_code=status.HTTP_202_ACCEPTED
-)
-def modificar_producto(product_id: int, productnew: Pyd.Producto):
-    with Session(engine) as session:
-        res = select(Tb.Producto).filter(Tb.Producto.id == product_id)
-        product = session.execute(res).one()
-        for key in productnew.__fields__:
-            if hasattr(product, key):
-                setattr(product, key, getattr(productnew, key))
-        session.add(product)
-        session.commit()
-        session.refresh(product)
-    return product
-
-@router.get("/{product_id}",response_model=Pyd.Producto, status_code=status.HTTP_202_ACCEPTED)
-def get_product(product_id: int):
-    with Session(engine) as session:
-        res = select(Tb.Producto).filter(Tb.Producto.id == product_id)
-        product = session.execute(res).one()
+    
+    def registrar_producto(product: Tb.Producto):
+        with Session(engine) as session:
+            session.add(product)
+            session.commit()
+            session.refresh(product)
         return product
 
+
+    @router.put(
+        "/{product_id}", response_model=Tb.Producto, status_code=status.HTTP_202_ACCEPTED
+    )
+    def modificar_producto(product_id: int, productnew: Tb.ProductModify):
+        with Session(engine) as session:
+            res = select(Tb.Producto).filter(Tb.Producto.id == product_id)
+            product = session.exec(res).one()
+            for key in productnew.__fields__:
+                if hasattr(product,key):
+                    setattr(product,key, getattr(productnew, key))
+            session.add(product)
+            session.commit()
+            session.refresh(product)
+        return product
