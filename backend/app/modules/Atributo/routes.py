@@ -25,7 +25,7 @@ def registrar_atributo(atributo: Tb.Atributo):
     with Session(engine) as session:
         # TODO
         # report a bug happends when default field is not set and then the field.validator didn't run
-        atributo = force_check(atributo, b.Atributo)
+        atributo = force_check(atributo, Tb.Atributo)
         # TODO-END
         session.add(atributo)
         session.commit()

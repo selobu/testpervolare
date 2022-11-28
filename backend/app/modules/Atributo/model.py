@@ -1,5 +1,5 @@
 from typing import Optional
-from tools import map_name_to_table
+from tools import map_name_to_table, uuid_isvalid
 from config import settings
 from sqlmodel import Field, SQLModel, Column, String, Field, Date
 from uuid import uuid4
@@ -19,16 +19,12 @@ class Atributo(SQLModel, table=True):
     softDelete: Optional[date] = Field(default=None, sa_column=Column(Date), description="Softdelete date")
     @validator("id")
     def uuid_validator(cls, v):
-        print('// ---- Atribute id --//')
-        print(v)
         if v is not None:
-            res = re.findall('[0-9a-f]{12}4[0-9a-f]{3}[89ab][0-9a-f]{15}\Z',v )
-            res = ''.join(res)
-            if len(res) != len(v):
+            if not uuid_isvalid(v):
                 raise ValueError('Only allowed uuid version 4 identifier')
             return v
         else:
-            return uuid4()
+            return str(uuid4())
         
     @validator("name")
     def name_validator(cls, v):
