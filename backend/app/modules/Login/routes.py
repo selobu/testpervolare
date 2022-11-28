@@ -50,24 +50,3 @@ async def get_current_active_user(current_user: Tb.User = Depends(get_current_us
     if not current_user.activo:
         raise HTTPException(status_code=400, detail="Usuario inactivo")
     return current_user
-
-
-@router.get("/")
-async def read_all_user(
-    commons: dict = Depends(paginate_parameters), token: str = Depends(oauth2_scheme)
-):
-    email = token
-    limit = commons["limit"]
-    with Session(engine) as session:
-        res = select(Tb.User).limit(limit)
-        res = session.exec(res).all()
-    return res
-
-
-@router.post("/", response_model=Tb.User, status_code=status.HTTP_201_CREATED)
-async def registrar_user(user: Tb.User, token: str = Depends(oauth2_scheme)):
-    with Session(engine) as session:
-        session.add(user)
-        session.commit()
-        session.refresh(user)  # updating the id
-    return user
