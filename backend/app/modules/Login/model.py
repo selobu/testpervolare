@@ -10,7 +10,7 @@ import re
 class Login(SQLModel, table=True):
     email: Optional[EmailStr] = Field(default=None, primary_key=True)
     password: str = Field(sa_column=Column(String(300)), nullable=False)
-    user_id: Optional[str] = Field(default=None, foreign_key="user.id")
+    user_id: Optional[int] = Field(default=None, foreign_key="user.id")
 
     @validator("password")
     def pass_validator(cls, v):

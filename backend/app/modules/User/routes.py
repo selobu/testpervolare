@@ -1,18 +1,15 @@
 from fastapi import status, Depends, HTTPException, APIRouter
 from fastapi.security import OAuth2PasswordBearer
-
-# from fake import fake_users_db
 from tools import paginate_parameters
 from typing import Union, List
 from config import settings
-from sqlmodel import Session, select
+from sqlmodel import Session, select, SQLModel
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 router = APIRouter(
     prefix="/Users",
     tags=["Users"],
-    dependencies=[Depends(oauth2_scheme)],
     responses={404: {"description": "Not found"}},
 )
 
@@ -20,56 +17,26 @@ Tb = settings.app.Tb
 engine = settings.engine
 
 
+def regfromclass(value, clase: SQLModel):
+    toset = [r for r in value.__fields__ if r in clase.__fields__]
+    res = dict()
+    for item in toset:
+        res[item] = getattr(value, item)
+    return clase(**res)
+
+
 @router.post("/", response_model=Tb.User, status_code=status.HTTP_201_CREATED)
-async def registrar_user(user: Tb.User, token: str = Depends(oauth2_scheme)):
+async def registrar_user(user: Tb.UserRegister):
     with Session(engine) as session:
-        session.add(user)
+        usr = regfromclass(user, Tb.User)
+        login = regfromclass(user, Tb.Login)
+        session.add(login)
         session.commit()
-        session.refresh(user)  # updating the id
-    return user
-
-
-def get_user(email: str):
-    with Session(engine) as session:
-        res = select(Tb.User).filter(Tb.User.correo == email)
-        res = session.exec(res).first()
-        if res is not None:
-            return res
-        raise HTTPException(status_code=404, detail="User not found")
-
-
-def fake_decode_token(token):
-    user = get_user(token)
-    return user
-
-
-async def get_current_user(token: str = Depends(oauth2_scheme)):
-    user = fake_decode_token(token)
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid credentials",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-    return user
-
-
-async def get_current_active_user(current_user: Tb.User = Depends(get_current_user)):
-    if not current_user.activo:
-        raise HTTPException(
-            status_code=400,
-            detail="Inactive user please contact the administrator at admin_mail@mail.com",
-        )
-    return current_user
-
-
-@router.get("/")
-async def read_all_user(
-    commons: dict = Depends(paginate_parameters), token: str = Depends(oauth2_scheme)
-):
-    email = token
-    limit = commons["limit"]
-    with Session(engine) as session:
-        res = select(Tb.User).limit(limit)
-        res = session.exec(res).all()
-    return res
+        session.add(usr)
+        session.commit()
+        session.refresh(usr)  # updating the id
+        login.user_id = usr.id
+        session.add(login)
+        session.commit()
+        session.refresh(usr)
+    return usr

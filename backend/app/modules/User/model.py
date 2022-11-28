@@ -1,7 +1,7 @@
 from typing import Optional
 from tools import map_name_to_table
 from sqlmodel import Field, SQLModel, Column, String, Field
-
+from pydantic import EmailStr
 
 @map_name_to_table
 class User(SQLModel, table=True):
@@ -12,3 +12,13 @@ class User(SQLModel, table=True):
     municipio: str = Field(sa_column=Column(String(200)))
     direccion: str = Field(sa_column=Column(String(250)))
     activo: bool = True
+
+@map_name_to_table
+class UserRegister(SQLModel):
+    nombre_completo: str = Field(sa_column=Column(String(400)), unique=True)
+    cedula: str = Field(sa_column=Column(String(200)))
+    departamento: str = Field(sa_column=Column(String(200)))
+    municipio: str = Field(sa_column=Column(String(200)))
+    direccion: str = Field(sa_column=Column(String(250)))
+    email: Optional[EmailStr] = Field(default=None, primary_key=True)
+    password: str = Field(sa_column=Column(String(300)), nullable=False)
