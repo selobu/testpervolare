@@ -7,6 +7,7 @@ from typing import Union, List
 from config import settings
 from sqlalchemy.orm import Session
 from sqlalchemy import select
+
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 router = APIRouter(
@@ -24,7 +25,7 @@ engine = settings.engine
 def get_user(email: str):
     with Session(engine) as session:
         res = select(Tb.User).filter(Tb.User.correo == email)
-        res = session.exec(res).first()
+        res = session.execute(res).first()
         if res is not None:
             return res
         raise HTTPException(status_code=404, detail="Usuario no encontradp")

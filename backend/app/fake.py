@@ -11,9 +11,9 @@ def create_emails(users: list[int], emails: list, passwords: list):
     Tb = settings.app.Tb
     with Session(settings.engine) as session:
         not2add = select(Tb.Login.user_id).filter(Tb.Login.user_id.in_(users))
-        not2add = session.exec(not2add).all()
+        not2add = session.execute(not2add).all()
         # testing under heroku server
-        # raise Exception(dumps(session.exec(select(Tb.User.correo)).all()))
+        # raise Exception(dumps(session.execute(select(Tb.User.correo)).all()))
         toadd = [
             {"email": email, "password": password, "user_id": user}
             for user, email, password in zip(users, emails, passwords)
@@ -49,9 +49,9 @@ def create_users():
         not2add = select(Tb.User.nombre_completo).filter(
             Tb.User.nombre_completo.in_(nombres)
         )
-        not2add = session.exec(not2add).all()
+        not2add = session.execute(not2add).all()
         # testing under heroku server
-        # raise Exception(dumps(session.exec(select(Tb.User.correo)).all()))
+        # raise Exception(dumps(session.execute(select(Tb.User.correo)).all()))
         toadd = [usr for usr in default_users if usr["nombre_completo"] not in not2add]
         res = []
         for user in toadd:

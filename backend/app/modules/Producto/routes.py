@@ -38,10 +38,10 @@ def registrar_producto(product: Pyd.Producto):
 def modificar_producto(product_id: int, productnew: Pyd.Producto):
     with Session(engine) as session:
         res = select(Tb.Producto).filter(Tb.Producto.id == product_id)
-        product = session.exec(res).one()
+        product = session.execute(res).one()
         for key in productnew.__fields__:
-            if hasattr(product,key):
-                setattr(product,key, getattr(productnew, key))
+            if hasattr(product, key):
+                setattr(product, key, getattr(productnew, key))
         session.add(product)
         session.commit()
         session.refresh(product)
