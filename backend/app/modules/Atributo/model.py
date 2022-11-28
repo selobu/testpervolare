@@ -33,6 +33,3 @@ class Atributo(Base):
         if v not in allowed:
             raise ValueError(f"type incorrect, only allowed {allowed}")
         return v
-
-
-a = 1
