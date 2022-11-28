@@ -20,7 +20,8 @@ router = APIRouter(
 Tb = settings.app.Tb
 engine = settings.engine
 
-@router.post('/', response_model=Tb.Producto, status_code=status.HTTP_201_CREATED)
+
+@router.post("/", response_model=Tb.Producto, status_code=status.HTTP_201_CREATED)
 def registrar_producto(product: Tb.Producto):
     with Session(engine) as session:
         session.add(product)
@@ -32,14 +33,41 @@ def registrar_producto(product: Tb.Producto):
 @router.put(
     "/{product_id}", response_model=Tb.Producto, status_code=status.HTTP_202_ACCEPTED
 )
-def modificar_producto(product_id: int, productnew: Tb.ProductoModify):
+def modificar_producto(product_id: str, productnew: Tb.ProductoModify):
     with Session(engine) as session:
         res = select(Tb.Producto).filter(Tb.Producto.id == product_id)
         product = session.exec(res).one()
         for key in productnew.__fields__:
-            if hasattr(product,key):
-                setattr(product,key, getattr(productnew, key))
+            if hasattr(product, key):
+                setattr(product, key, getattr(productnew, key))
         session.add(product)
         session.commit()
         session.refresh(product)
     return product
+
+
+@router.get(
+    "/{product_id}", response_model=Tb.Producto, status_code=status.HTTP_202_ACCEPTED
+)
+def leer_producto(product_id: str):
+    with Session(engine) as session:
+        res = select(Tb.Producto).filter(Tb.Producto.id == product_id)
+        product = session.exec(res).one()
+        return product
+
+
+@router.get("/", response_model=List[Tb.Producto], status_code=status.HTTP_202_ACCEPTED)
+def leer_productos():
+    with Session(engine) as session:
+        res = select(Tb.Producto)
+        products = session.exec(res).all()
+        return products
+
+
+@router.delete("/{product_id}",status_code=status.HTTP_200_OK)
+def eliminar_producto(product_id: str):
+    with Session(engine) as session:
+        res = select(Tb.Producto).filter(Tb.Producto.id == product_id)
+        product = session.exec(res).one()
+        session.delete(product)
+        session.commit()
