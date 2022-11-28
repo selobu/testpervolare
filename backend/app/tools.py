@@ -3,6 +3,8 @@ import random
 import hashlib
 from typing import Union
 
+def force_check(table_son, table):
+    return table(**dict((key, getattr(table_son, key)) for key in table_son.__fields__.keys()))
 
 def digest(text):
     if isinstance(text, str):

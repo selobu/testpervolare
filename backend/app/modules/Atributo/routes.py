@@ -2,7 +2,7 @@ from fastapi import status, Depends, HTTPException, APIRouter
 from fastapi.security import OAuth2PasswordBearer
 
 # from fake import fake_users_db
-from tools import paginate_parameters
+from tools import paginate_parameters, force_check
 from typing import Union
 from config import settings
 from sqlmodel import Session, select
@@ -23,6 +23,10 @@ engine = settings.engine
 @router.post("/", response_model=Tb.Atributo, status_code=status.HTTP_201_CREATED)
 def registrar_atributo(atributo: Tb.Atributo):
     with Session(engine) as session:
+        # TODO
+        # report a bug happends when default field is not set and then the field.validator didn't run
+        atributo = force_check(atributo, b.Atributo)
+        # TODO-END
         session.add(atributo)
         session.commit()
         session.refresh(atributo)
