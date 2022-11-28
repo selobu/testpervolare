@@ -61,8 +61,11 @@ class Atributo(Base):
             raise ValueError(f"type incorrect, only allowed {allowed}")
         return v
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 
 a = 1
 >>>>>>> b56f21e (black apply)
+=======
+>>>>>>> 9c4c16a (readme update)
