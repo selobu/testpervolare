@@ -38,7 +38,7 @@ jobs:
       - name: Lint
         run: |
           cd backend
-          bash app/scripts/lint.sh
+          bash scripts/lint.sh
       #- name: Test with inv
       #  run: inv cover qa # inv helps you investigate IPs/hosts and DNS records then returns the results in a copy/pasteable format.
       #- name: Codecov
