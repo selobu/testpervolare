@@ -38,5 +38,5 @@ Repository status
 * [X] Backend: Endpoints: -> Products, -> Atributos
 * [x] Backend: Tests - logic implemented, it's required to increase de code coverage.
 * [ ] Backend: Codecoverage config
-* [ ] Backend: Migrations
+* [x] Backend: Migrations - by using [alembic](https://alembic.sqlalchemy.org/en/latest/)
 * [ ] Frontend

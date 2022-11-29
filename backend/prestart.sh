@@ -9,3 +9,5 @@ echo "
 sleep 10;
 # Run migrations
 alembic upgrade head"
+sleep 50;
+alembic upgrade head;
