@@ -36,6 +36,7 @@ Repository status
 * [x] Backend: Authentication
 * [x] Backend: Registering users by themselves
 * [X] Backend: Endpoints: -> Products, -> Atributos
-* [ ] Backend: Tests
+* [x] Backend: Tests - logic implemented, it's required to increase de code coverage.
+* [ ] Backend: Codecoverage config
 * [ ] Backend: Migrations
 * [ ] Frontend
