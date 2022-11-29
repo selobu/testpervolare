@@ -23,7 +23,15 @@ You should use it with [Docker](https://www.docker.com/):
 
 ## Repository status
 
-### Database Mysql - 100%
+Item   | status | pending
+----|-----|------
+Databse |  ![100%](https://progress-bar.dev/100) | Adjust permisions
+Backend | ![92%](https://progress-bar.dev/92) | increase pytest code coverage
+Docker | ![90%](https://progress-bar.dev/90) | Adjust healthcheck conditions
+FrontEnd | ![40%](https://progress-bar.dev/40) | axios, memory, components, and so on..
+
+
+### Database Mysql
 
 * [x] Database.
 * [x] Tables.
@@ -36,7 +44,7 @@ You should use it with [Docker](https://www.docker.com/):
 * [ ] Generate root password dynamically
   
 
-### Backend Fastapi gunicorn uvicorn - 92%
+### Backend Fastapi gunicorn uvicorn
 
 * [x] Docker.
 * [x] Model.
@@ -55,7 +63,9 @@ TODO
 
 * [ ] Check migrations by using alembic
 
-### Frontend - 20%
+### Frontend
+
+![](https://geps.dev/progress/40)
 
 * [x] Docker
 * [x] nginx
