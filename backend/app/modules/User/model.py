@@ -1,5 +1,5 @@
 from typing import Optional, List
-from tools import map_name_to_table
+from tools import map_name_to_table, uuid_isvalid
 from sqlmodel import Field, SQLModel, Column, String, Field, Relationship,\
     Boolean
 from pydantic import EmailStr, validator
@@ -23,11 +23,7 @@ class User(SQLModel, table=True):
     @validator("id")
     def uuid_validator(cls, v):
         if v not in [None, 'None']:
-            res = re.findall("[0-9a-f]{12}4[0-9a-f]{3}[89ab][0-9a-f]{15}\Z", v)
-            res = "".join(res)
-            assert len(res) == len(v)
-            print(v)
-            print(res)
+            assert uuid_isvalid(v)
             return v
         else:
             return uuid4()
