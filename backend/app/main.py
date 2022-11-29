@@ -54,7 +54,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 # Create data structure
-SQLModel.metadata.create_all(engine)
+# SQLModel.metadata.create_all(engine)
 
 if USESQLALCMEHY:
     import uvicorn
