@@ -16,7 +16,7 @@ class Login(SQLModel, table=True):
         nullable=False,
         description="User password only allowed a-z A-Z 0-9 and */+-$%&",
     )
-    user_id: Optional[int] = Field(
+    user_id: Optional[str] = Field(
         default=None, foreign_key="user.id", description="user id"
     )
     user: Optional["User"] = Relationship(back_populates="login")
