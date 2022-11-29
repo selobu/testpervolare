@@ -1,4 +1,5 @@
 # coding: utf-8
+__version__ = "0.1.0"
 from sys import path
 from pathlib import Path
 from os.path import abspath
