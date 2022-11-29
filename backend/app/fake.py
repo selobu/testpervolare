@@ -6,6 +6,7 @@ from tools import digest
 from json import dumps
 from typing import List
 
+
 def create_emails(users: List[int], emails: list, passwords: list):
     Tb = settings.app.Tb
     with Session(settings.engine) as session:

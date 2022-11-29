@@ -14,6 +14,6 @@ engine = create_engine(settings.database_user_uri)
 SQLModel.metadata.create_all(engine)
 
 # populating structure
-#create_users()
-#create_emails()
+# create_users()
+# create_emails()
 print("//----db updated----//")
