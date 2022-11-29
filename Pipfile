@@ -12,6 +12,8 @@ gunicorn = "*"
 sqlalchemy = "*"
 sqlmodel = "*"
 pymysql = "*"
+trio = "*"
+pytest-trio = "*"
 
 [dev-packages]
 
