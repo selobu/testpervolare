@@ -47,3 +47,8 @@ services:
       # notice: these lines don't start with "-"
       mysqldatabase:
         condition: service_healthy
+  frontend:
+    restart: on-failure
+    build:
+      context: ./frontend/.
+      dockerfile: Dockerfile
