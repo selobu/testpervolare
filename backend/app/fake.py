@@ -55,7 +55,7 @@ def create_users():
         toadd = [usr for usr in default_users if usr["nombre_completo"] not in not2add]
         res = []
         for user in toadd:
-            res.append(Tb.User(**user))
+            res.append(Tb.User(id=None, **user))
             session.add(res[-1])
         session.commit()
         [session.refresh(r) for r in res]
