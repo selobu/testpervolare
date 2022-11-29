@@ -33,7 +33,7 @@ jobs:
         run: |
           cd backend
           pip install -e .[test]
-      - name: Lint
+      - name: Pytest
         run: |
           cd backend
-          bash scripts/lint.sh
+          bash scripts/pytest.sh
