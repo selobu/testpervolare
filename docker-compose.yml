@@ -52,3 +52,5 @@ services:
     build:
       context: ./frontend/.
       dockerfile: Dockerfile
+    ports:
+      - "80:80"

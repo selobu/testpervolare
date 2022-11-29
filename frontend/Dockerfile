@@ -37,6 +37,6 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # ----------- END PRODUCTION STAGE ---------------
 
 # Then the console
-# >> docker build -t selobu/casino .
-# >> docker run -p 80:80 selobu/casino
+# >> docker build -t selobu/product .
+# >> docker run -p 80:80 selobu/product
 # otherwise check docker-compose

@@ -16,8 +16,7 @@ You should use it with [Docker](https://www.docker.com/):
 
 **APi**: Navigate to http://localhost:88/docs
 
-    Missing
-    **frontEnd**: Navigate to http://localhost:xx
+**frontEnd**: Navigate to http://localhost or http://localhost:80 
 
 Repository status
 -----------------
