@@ -34,6 +34,6 @@ async def registrar_user(user: Tb.UserRegister):
         session.add(login)
         session.commit()
         session.refresh(login)
-        print('/////--------Reading user -----------/////')
+        print("/////--------Reading user -----------/////")
         print(login.user)
         return login.user
