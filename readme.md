@@ -8,7 +8,7 @@
 Usage
 ======
 
-You can use it with [Docker](https://www.docker.com/):
+You should use it with [Docker](https://www.docker.com/):
 
     $ docker compose -f "docker-compose.yml" down 
     $ docker compose -f "docker-compose.yml" up -d --build
