@@ -10,7 +10,7 @@
         <v-layout>
           <v-navigation-drawer v-model="drawer" temporary>
             <v-list-item
-              prepend-avatar="https://randomuser.me/api/portraits/men/84.jpg"
+              prepend-avatar="https://www.gravatar.com/avatar/302c652af1a74abdadf3dcaebd6513ee?s=120"
               title="About"
               nav
             >
