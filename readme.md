@@ -16,7 +16,9 @@ You should use it with [Docker](https://www.docker.com/):
 ## Mapped ports
 
 **Mysql**: Navigate to http://localhost:3307
+
 **APi**: Navigate to http://localhost:88/docs 
+
 **frontEnd**: Navigate to http://localhost or http://localhost:80 
 
 ## Repository status
@@ -60,8 +62,18 @@ TODO
 * [x] dockerignore
 * [x] vuetify
 * [x] Router
-* [ ]  
+* [x] axios
+* [ ] Sign in
+* [ ] Sign up
+* [ ] Product list
+* [ ] Product list filter
+* [ ] Product delete
+* [ ] Attirute list
+* [ ] Attribute list filter
+* [ ] Attribute delete
 
-**YOUTUBE**
+**Video description**
 
-[Video description](https://youtu.be/maRKriel5ao)
+Spanish repository video description
+
+[![image](http://img.youtube.com/vi/maRKriel5ao/0.jpg)](https://youtu.be/maRKriel5ao)
