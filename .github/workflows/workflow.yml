@@ -18,7 +18,6 @@ jobs:
       run: |
         cd backend
         pip install -e .[test]
-        pip install pytest-cov
         pytest --cov=./ --cov-report=xml
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
