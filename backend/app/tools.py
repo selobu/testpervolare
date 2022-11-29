@@ -61,8 +61,3 @@ def generate_random(largo=6):
         random_string += chr(random_integer)
 
     return random_string
-
-
-def sendmail(destination, bodycontent, *args, **kwarg):
-    # TODO
-    pass
