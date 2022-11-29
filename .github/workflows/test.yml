@@ -39,7 +39,6 @@ jobs:
           bash scripts/lint.sh
       - name: Generate coverage report
         run: |
-          cd backend
           pip install pytest
           pip install pytest-cov
           pytest --cov=./ --cov-report=xml
