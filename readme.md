@@ -24,11 +24,11 @@ Repository status
 
 **Database Mysql - 100%**
 
-* [x] Database. 26-11-2022
-* [x] Tables. 26-11-2022
-* [x] Relationships. 26-11-2022
-* [x] Docker: container configuration. 26-11-2022
-* [x] Docker: container test. 26-11-2022
+* [x] Database.
+* [x] Tables.
+* [x] Relationships.
+* [x] Docker: container configuration.
+* [x] Docker: container test.
 
 TODO
 * [ ] Contrain admin user permisions
@@ -37,18 +37,18 @@ TODO
 
 **Backend Fastapi gunivcorn uvicorn - 92%**
 
-* [x] Docker: 26-11-2022
-* [x] Model. 27-11-2022
-* [x] Model fields validation. 27-11-2022
-* [x] Github: lint - using black.  27-11-2022
-* [x] Github: Added badges to show repository status.  27-11-2022 
-* [x] Added two users by default, to be used to test the auth. 27-11-2022
-* [x] Authentication 28-11-2022 
-* [x] Registering users by themselves 28-11-2022 
-* [X] Endpoints: -> Products, -> Atributos 28-11-2022 
-* [x] Tests - logic implemented, it's required to increase de code coverage. 29-11-2022 
+* [x] Docker.
+* [x] Model.
+* [x] Model fields validation.
+* [x] Github: lint - using black.
+* [x] Github: Added badges to show repository status.
+* [x] Added two users by default, to be used to test the auth.
+* [x] Authentication.
+* [x] Registering users by themselves. 
+* [X] Endpoints: -> Products -> Atributos 
+* [x] Tests - logic implemented, it's required to increase de code coverage. 
 * [ ] Backend: Codecoverage config
-* [x] Backend: Migrations - by using [alembic](https://alembic.sqlalchemy.org/en/latest/) 29-11-2022
+* [x] Backend: Migrations - by using [alembic](https://alembic.sqlalchemy.org/en/latest/)
 
 TODO
 
