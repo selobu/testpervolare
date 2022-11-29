@@ -2,13 +2,13 @@
   <v-app>
     <NavBar title="Products application">
       <template v-slot:drawbtn>
-       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </template>
     </NavBar>
     <v-content style="height: 100vh">
-      <v-card style="height: 100vh">
+      <v-card>
         <v-layout>
-          <v-navigation-drawer v-model="drawer" temporary>
+          <v-navigation-drawer v-model="drawer" temporary> 
             <v-list-item
               prepend-avatar="https://randomuser.me/api/portraits/men/84.jpg"
               title="John Leider"
@@ -36,7 +36,9 @@
               ></v-list-item>
             </v-list>
           </v-navigation-drawer>
-          <v-main style="height: 250px"></v-main>
+          <v-main style="height: 100vh">
+            <v-router></v-router>
+          </v-main>
         </v-layout>
         <router-view />
       </v-card>
@@ -49,6 +51,9 @@ import Navbar from "./components/navbar.vue";
 import Footer from "./components/footer.vue";
 
 export default {
+  data: () => ({
+    drawer : null
+  }),
   components: {
     NavBar: Navbar,
     Footer: Footer,
