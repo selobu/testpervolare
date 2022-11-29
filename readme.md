@@ -4,6 +4,7 @@
 ![codecov](https://codecov.io/gh/selobu/testpervolare/branch/master/graph/badge.svg)
 ![Codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)
 
+Backend [![Python Version](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%20pypy3-blue)](https://www.python.org/downloads/release/python-390/)
 
 Usage
 ======
