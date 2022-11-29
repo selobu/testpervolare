@@ -1,1 +1,25 @@
 database.db
+
+frontend/product/.DS_Store
+frontend/product/node_modules
+frontend/product/dist
+
+
+# local env files
+frontend/product/.env.local
+frontend/product/.env.*.local
+
+# Log files
+frontend/product/npm-debug.log*
+frontend/product/yarn-debug.log*
+frontend/product/yarn-error.log*
+frontend/product/pnpm-debug.log*
+
+# Editor directories and files
+frontend/product/.idea
+frontend/product/.vscode
+frontend/product/*.suo
+frontend/product/*.ntvs*
+frontend/product/*.njsproj
+frontend/product/*.sln
+frontend/product/*.sw?
