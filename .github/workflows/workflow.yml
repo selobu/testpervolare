@@ -17,10 +17,7 @@ jobs:
     - name: Generate coverage report
       run: |
         cd backend
-        pip install pytest
-        pip install pytest-cov
-        pip install pytest-anyio
-        pip install trio
+        pip install -e .[test]
         pytest --cov=./ --cov-report=xml
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
