@@ -18,7 +18,7 @@ def test_tools_uuid_isvalid():
     assert tools.uuid_isvalid("16fd2706-8baf-433b-82eb-8c7fada847da")
 
 
-@pytest.mark.trio
+@pytest.mark.anyio
 async def test_tools_paginate_parameters():
     q = "hellostr"
     skip = 2
