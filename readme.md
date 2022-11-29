@@ -33,10 +33,10 @@ Repository status
 * [x] Github: lint - using black.  27-11-2022
 * [x] Github: Added badges to show repository status.  27-11-2022 
 * [x] Backend: Added two users by default, to be used to test the auth. 27-11-2022
-* [x] Backend: Authentication
-* [x] Backend: Registering users by themselves
-* [X] Backend: Endpoints: -> Products, -> Atributos
-* [x] Backend: Tests - logic implemented, it's required to increase de code coverage.
+* [x] Backend: Authentication 28-11-2022 
+* [x] Backend: Registering users by themselves 28-11-2022 
+* [X] Backend: Endpoints: -> Products, -> Atributos 28-11-2022 
+* [x] Backend: Tests - logic implemented, it's required to increase de code coverage. 29-11-2022 
 * [ ] Backend: Codecoverage config
-* [x] Backend: Migrations - by using [alembic](https://alembic.sqlalchemy.org/en/latest/)
+* [x] Backend: Migrations - by using [alembic](https://alembic.sqlalchemy.org/en/latest/) 29-11-2022 
 * [ ] Frontend
