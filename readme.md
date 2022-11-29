@@ -40,7 +40,7 @@ FrontEnd | ![40%](https://progress-bar.dev/40) | axios, memory, components, and 
 * [x] Docker: container test.
 
  TODO
-* [ ] Contrain admin user permisions
+* [ ] Constrain admin user permisions
 * [ ] Generate root password dynamically
   
 
