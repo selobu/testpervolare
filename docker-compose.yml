@@ -40,7 +40,7 @@ services:
       dockerfile: Dockerfile
     # open ports
     ports:
-      - "80:80"
+      - "88:80"
     volumes:
       - ./backend/app/:/app
     depends_on:
