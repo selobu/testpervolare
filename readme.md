@@ -39,4 +39,7 @@ Repository status
 * [x] Backend: Tests - logic implemented, it's required to increase de code coverage. 29-11-2022 
 * [ ] Backend: Codecoverage config
 * [x] Backend: Migrations - by using [alembic](https://alembic.sqlalchemy.org/en/latest/) 29-11-2022 
-* [ ] Frontend
+* [x] Frontend: Docker
+* [x] Frontend: nginx
+* [x] Frontend: dockerignore
+* [ ] Frontend:
