@@ -17,4 +17,9 @@ const app = createApp(App)
 
 registerPlugins(app)
 
+
+// Router
+import router from './router'
+app.use(router)
+
 app.mount('#app')
