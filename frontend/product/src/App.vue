@@ -8,10 +8,10 @@
     <v-content style="height: 100vh">
       <v-card>
         <v-layout>
-          <v-navigation-drawer v-model="drawer" temporary> 
+          <v-navigation-drawer v-model="drawer" temporary>
             <v-list-item
               prepend-avatar="https://randomuser.me/api/portraits/men/84.jpg"
-              title="John Leider"
+              title="About"
               nav
             >
             </v-list-item>
@@ -20,9 +20,11 @@
 
             <v-list density="compact" nav>
               <v-list-item
+                to="/"
                 prepend-icon="mdi-home-city"
-                title="Home"
+                title="Home page"
                 value="home"
+                link
               ></v-list-item>
               <v-list-item
                 prepend-icon="mdi-account"
@@ -30,14 +32,17 @@
                 value="account"
               ></v-list-item>
               <v-list-item
+                to="/products"
                 prepend-icon="mdi-account-group-outline"
-                title="Users"
-                value="users"
-              ></v-list-item>
+                title="Products"
+                value="products"
+                link
+              >
+              </v-list-item>
             </v-list>
           </v-navigation-drawer>
           <v-main style="height: 100vh">
-            <v-router></v-router>
+            <router-view />
           </v-main>
         </v-layout>
         <router-view />
@@ -52,7 +57,7 @@ import Footer from "./components/footer.vue";
 
 export default {
   data: () => ({
-    drawer : null
+    drawer: null,
   }),
   components: {
     NavBar: Navbar,
