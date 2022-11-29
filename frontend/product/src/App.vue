@@ -45,7 +45,6 @@
             <router-view />
           </v-main>
         </v-layout>
-        <router-view />
       </v-card>
     </v-content>
     <Footer></Footer>
