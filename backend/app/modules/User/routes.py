@@ -22,14 +22,13 @@ def regfromclass(value, clase: SQLModel):
     res = dict()
     for item in toset:
         res[item] = getattr(value, item)
-    return clase(**res)
+    return clase(id=None, **res)
 
 
 @router.post("/", response_model=Tb.User, status_code=status.HTTP_201_CREATED)
 async def registrar_user(user: Tb.UserRegister):
     with Session(engine) as session:
         usr = regfromclass(user, Tb.User)
-        usr.id = None
         login = regfromclass(user, Tb.Login)
         login.user = usr
         session.add(login)
