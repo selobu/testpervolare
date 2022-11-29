@@ -20,6 +20,7 @@ jobs:
         pip install pytest
         pip install pytest-cov
         pip install pytest-anyio
+        pip install trio
         pytest --cov=./ --cov-report=xml
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
