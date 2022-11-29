@@ -8,7 +8,7 @@ from uuid import uuid4
 
 @map_name_to_table
 class User(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True, description="UUID 4")
+    id: Optional[str] = Field(default=None, primary_key=True, description="UUID 4")
     nombre_completo: str = Field(
         sa_column=Column(String(400)), unique=True, description="User fullname"
     )
