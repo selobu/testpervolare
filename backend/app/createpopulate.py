@@ -14,6 +14,13 @@ engine = create_engine(settings.database_user_uri)
 SQLModel.metadata.create_all(engine)
 
 # populating structure
-# create_users()
-# create_emails()
+
+# populate initial data
+users = create_users()
+create_emails(
+    users,
+    emails=["newmail@mail.com", "secondmail@gmail.com"],
+    passwords=["123easdte", "4dsd9845"],
+)
+
 print("//----db updated----//")

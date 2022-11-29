@@ -56,14 +56,6 @@ app.add_middleware(
 # Create data structure
 SQLModel.metadata.create_all(engine)
 
-# populate initial data
-users = create_users()
-create_emails(
-    users,
-    emails=["newmail@mail.com", "secondmail@gmail.com"],
-    passwords=["123easdte", "4dsd9845"],
-)
-
 if USESQLALCMEHY:
     import uvicorn
 
