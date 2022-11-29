@@ -29,6 +29,7 @@ def regfromclass(value, clase: SQLModel):
 async def registrar_user(user: Tb.UserRegister):
     with Session(engine) as session:
         usr = regfromclass(user, Tb.User)
+        usr.id = None
         login = regfromclass(user, Tb.Login)
         login.user = usr
         session.add(login)
