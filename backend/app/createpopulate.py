@@ -9,11 +9,11 @@ from fake import create_users, create_emails
 from main import Tb, settings
 from sqlmodel import create_engine, SQLModel
 
-engine = create_engine(settings.database_maria_uri)
+engine = create_engine(settings.database_user_uri)
 # creating database structure
 SQLModel.metadata.create_all(engine)
 
 # populating structure
-create_users()
-create_emails()
+#create_users()
+#create_emails()
 print("//----db updated----//")

@@ -6,22 +6,22 @@
 
 Backend [![Python Version](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue)](https://www.python.org/downloads/release/python-390/)
 
-Usage
-======
+## Usage
 
 You should use it with [Docker](https://www.docker.com/):
 
     $ docker compose -f "docker-compose.yml" down 
     $ docker compose -f "docker-compose.yml" up -d --build
 
-**APi**: Navigate to http://localhost:88/docs
+## Mapped ports
 
+**Mysql**: Navigate to http://localhost:3307
+**APi**: Navigate to http://localhost:88/docs 
 **frontEnd**: Navigate to http://localhost or http://localhost:80 
 
-Repository status
------------------
+## Repository status
 
-**Database Mysql - 100%**
+### Database Mysql - 100%
 
 * [x] Database.
 * [x] Tables.
@@ -29,12 +29,12 @@ Repository status
 * [x] Docker: container configuration.
 * [x] Docker: container test.
 
-TODO
+ TODO
 * [ ] Contrain admin user permisions
 * [ ] Generate root password dynamically
   
 
-**Backend Fastapi gunicorn uvicorn - 92%**
+### Backend Fastapi gunicorn uvicorn - 92%
 
 * [x] Docker.
 * [x] Model.
@@ -53,9 +53,11 @@ TODO
 
 * [ ] Check migrations by using alembic
 
-**Frontend - 20%**
+### Frontend - 20%
 
-* [x] Frontend: Docker
-* [x] Frontend: nginx
-* [x] Frontend: dockerignore
-* [ ] Frontend:
+* [x] Docker
+* [x] nginx
+* [x] dockerignore
+* [x] vuetify
+* [x] Router
+* [ ]  

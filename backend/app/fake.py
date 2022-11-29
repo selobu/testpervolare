@@ -4,9 +4,9 @@ from config import settings
 from sqlmodel import Session, select, SQLModel
 from tools import digest
 from json import dumps
+from typing import List
 
-
-def create_emails(users: list[int], emails: list, passwords: list):
+def create_emails(users: List[int], emails: list, passwords: list):
     Tb = settings.app.Tb
     with Session(settings.engine) as session:
         not2add = select(Tb.Login.user_id).filter(Tb.Login.user_id.in_(users))
